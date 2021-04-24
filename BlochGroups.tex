@@ -1,0 +1,2529 @@
+   
+\documentclass[11pt]{article}
+\renewcommand{\baselinestretch}{1.05}
+\usepackage{amsmath,amsthm,verbatim,amssymb,amsfonts,amscd, graphicx}
+\usepackage[mathscr]{euscript}
+\usepackage{graphics}
+\usepackage{amsmath}
+\usepackage{cite}
+\topmargin0.0cm
+\headheight0.0cm
+\headsep0.0cm
+\oddsidemargin0.0cm
+\textheight23.0cm
+\textwidth16.5cm
+\footskip1.0cm
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem*{surfacecor}{Corollary 1}
+\newtheorem{conjecture}{Conjecture} 
+\newtheorem{question}{Question} 
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+ \begin{document}
+
+\title{An Examination of Pre-Bloch Groups over Finite Fields with Elementary Techniques}
+\author{Adam Ryan}
+\maketitle
+
+\section{Abstract}\label{section:abstract}
+
+I prove the linear independence of $\frac{q-1}{2}$ relations of the pre-Bloch group over a field $\mathbb{F}_q$ with $char(\mathbb{F}_q)  \neq 2$ using only elementary methods. It is known for a pre-Bloch group over a finite field that $q-2$ relations are  linearly independent, however this result has previously been shown using techniques which originate from Homology and K-Theory. This result places a lower bound on the number of linearly independent relations, and may serve as a stepping-stone towards an elementary proof that the pre-Bloch group over a finite field is itself finite.
+
+\pagebreak
+\tableofcontents
+\pagebreak
+
+\section{Introduction}\label{section:Preliminary}
+
+It has been shown by Hutchinson \cite{1107.0264} that the pre-Bloch group of a finite field of order $q$ is isomorphic to a cyclic group of order $q+1$. This fact corresponds to the result that the presentation matrix of the pre-Bloch group must have maximal rank. The motivating questions for this study are the following:\\
+\\
+It has been shown that the presentation matrix of a pre-Bloch group over a finite field has maximal rank. 
+	\begin{itemize}
+		\item Is it possible to explicitly describe which $q-2$ relations of the total $(q-2)\cdot (q-3)$ relations  are linearly independant using only elementary techniques? 
+		\item Can it then be shown that the pre-Bloch Group is cyclic?
+		\item If we can show that the pre-Bloch Group is cyclic, can we explicitly find a generator?
+		\item Are there any identities amongst the relations which can be found?
+	\end{itemize}
+In this section we will introduce the pre-Bloch group over a finite field, provide a motivation for its study, and provide some known results. As the structure of the pre-Bloch group is fundamentally tied to the arithmetic of the underlying field, we will review what we mean by a field and detail some essential results which will prove necessary to our study of the pre-Bloch group. Finally, as the concept of free modules and presentation matrices are intrinsically linked to our exploration of the pre-Bloch group over a finite field, we will provide a brief revision of these topics.
+\pagebreak
+\subsection{Review of Fields}\label{section:Review of Fields}
+
+In this section, we will review what we mean by a finite field, and we will explore the key results which are required to examine the pre-Bloch group. The study of fields dates back to [x] where it was introduced and developed by [y] to answer the question of [x]. As the underlying arithmetic of the finite field is largely responsible for the structure of the pre-Bloch group over that field, it is essential that the reader is deeply familiar with these results and the notation associated with finite fields. The exposition here is based on \cite{Algebra}.  \\
+\\
+\textbf{\underline{Definition:}} Field \\
+We say that a set $\mathbb{F} $, with $+$ (addition) and $\cdot$  (multiplication), is a field if it satisfies the following:
+\\
+\\ $+: \mathbb{F}  \times \mathbb{F}  \rightarrow \mathbb{F} $ by $(a,b) = a+b $
+\\$\cdot : \mathbb{F}  \times \mathbb{F}  \rightarrow \mathbb{F} $ by $(a,b) = a \cdot b $
+  \begin{itemize}
+	\item A1] $a+(b+c) = (a+b)+c$, $\forall a,b,c \in \mathbb{F} $
+	
+	\item A2] $\exists y \in \mathbb{F}  : \forall a \in F$,  $a+y = a$.  $y:=0_\mathbb{F}$
+	
+	\item A3] $\exists z \in \mathbb{F} $ which depends on our choice of $a \in \mathbb{F} $ : $a+z = 0_\mathbb{F} $.   $z:= -a$
+	
+	\item A4] $a+b = b+a$, $\forall a,b \in \mathbb{F} $
+	
+	\item A5] $a \cdot (b \cdot c) = (a \cdot b) \cdot c$, $\forall a,b,c \in \mathbb{F} $
+	
+	\item A6] $ a \cdot (b +  c) = (a \cdot b)+(a \cdot c)$, and likewise $(a + b) \cdot c = (a \cdot c)+(b \cdot c)$ $\forall a,b,c \in \mathbb{F} $
+	
+	\item A7] $\exists y \in \mathbb{F}  : \forall a \in \mathbb{F} $,  $a \cdot y = y \cdot a = a$.  $y:=1_\mathbb{F} $
+	
+	\item A8] $a \cdot b = b \cdot a$, $\forall a,b \in \mathbb{F} $
+	
+	\item A9] $\exists z \in \mathbb{F} $ which depends on our choice of $a \in \mathbb{F} $ : $a \cdot z = 1_F$.  $z:= a^{-1}$	
+  \end{itemize}
+\textbf{\underline{Note:}}\\ 
+We observe that  $( \mathbb{F} ,+,\cdot, 0_\mathbb{F} , 1_\mathbb{F} )$ is in fact a commutative ring in which every element has a multiplicative inverse.\\ 
+\\
+\textbf{\underline{Definition:}} Finite Field and Infinite Field. \\
+We say that a field is a finite field if $| \mathbb{F} | = n$, for $n \in
+\mathbb{N}$. If a field is not finite, we say it is an infinite field.\\
+\\
+\textbf{\underline{Example:}}\\ $(\mathbb{R}, +, \cdot)$ is a field.\\
+$(\mathbb{C}, +, \cdot)$ is a field\\
+$(\mathbb{Z}/p\mathbb{Z}, +, \cdot)$ is a field for a prime $p \in \mathbb{N}$\\
+\\
+\textbf{\underline{Example:}}\\ 
+$( \mathbb{Z}, +, \cdot)$ is not a field, since $a^{-1} \notin \mathbb{Z}$ for $a \neq \pm 1$ \\	$( GL_{n} ( \mathbb{R} ), +, \cdot)$ is not a field, since there exists non-commutative matrices without an inverse\\	
+\\
+\textbf{\underline{Proposition:}}\\
+ The commutative ring $(\mathbb{Z}/n\mathbb{Z}, +, \cdot)$ is a field if and only if $p$ is prime.\\
+\\
+\textbf{\underline{Proof:}}\\
+$\leftarrow$ First, we will suppose that $p$ is prime, and show that every element in $(\mathbb{Z}/p\mathbb{Z}, +, \cdot)$ has a multiplicative inverse.\\
+\\
+Recall that:\\
+\begin{equation*}
+\mathbb{Z}/p\mathbb{Z} = \{0,1,2, \ldots, p-1 \} \text{ with }gcd(p, a) = 1 \text{ for }a \in \mathbb{Z}/p\mathbb{Z}
+\end{equation*}
+\\
+Then we want to show that
+\begin{equation*}
+\forall a\in \mathbb{Z}/p\mathbb{Z} \text{, } \exists b \in \mathbb{Z}/p\mathbb{Z}\text{, such that } a \cdot b = 1 \text{ (mod p) }
+\end{equation*}
+Consider some $a \in \mathbb{Z}/p\mathbb{Z}$. Then:
+\begin{equation*}
+a \cdot \mathbb{Z}/p\mathbb{Z} = \{ a\cdot 0, a\cdot 1, a\cdot2, \ldots, a\cdot p-1\}
+\end{equation*}
+If these are not distinct, then:
+\begin{equation*}
+\exists b,c \in \mathbb{Z}/p\mathbb{Z}\text{ with } 0\leq b\leq c \leq p-1 \text{ such that } a\cdot b = a\cdot c\text{ (mod p)}
+\end{equation*}
+By subtracting:
+\begin{equation*}
+(a\cdot b) - (a\cdot c) = 0\text{ (mod p)}
+\end{equation*}
+By associativity:
+\begin{equation*}
+a\cdot (b - c) = 0\text{ (mod p)}
+\end{equation*}
+Hence by definition, and p being prime:
+\begin{equation*}
+p\text{ }|\text{ } a\text{ or } p\text{ }|\text{ } (b-c)
+\end{equation*}
+However, we have that $0 < a < p$ and $0 < b-c < p$, and thus this is not possible. Hence $| a \cdot \mathbb{Z}/p\mathbb{Z}| = p$ and by the Pigeonhole Principle, $\forall a \in \mathbb{Z}/p\mathbb{Z}$  we must have some $b \in \mathbb{Z}/p\mathbb{Z}$ such that $a \cdot b = 1$ (mod p)\\
+\\
+$\rightarrow$ Second, we will show that for $n$ composite, that not every element in $(\mathbb{Z}/n\mathbb{Z}, +, \cdot)$ has a multiplicative inverse.\\
+\\
+Recall that for a non-prime $n \in \mathbb{N}$:
+\begin{equation*}
+\mathbb{Z}/n\mathbb{Z} = \{0,1,2, \ldots, n-1 \} \text{ with }n = x \cdot y \text{ for }x,y \in \mathbb{N}, \text{ with } x < n \text{ and } y < n
+\end{equation*}
+\\
+Without loss of generality, suppose $x < y < n$. Then we have that $x \in \mathbb{Z}/n\mathbb{Z}$, and likewise $y \in \mathbb{Z}/n\mathbb{Z}$. So:
+\begin{equation*}
+x \cdot \mathbb{Z}/n\mathbb{Z} = \{ x\cdot 0, x\cdot 1, x\cdot2, \ldots, x\cdot x, \dots, x\cdot y, \ldots x\cdot p-1\}
+\end{equation*}
+Hence as $n = x \cdot y$
+\begin{equation*}
+x\cdot y = 0 \text{ (mod n)}
+\end{equation*}
+Thus there exists zero-divisors in $\mathbb{Z}/n\mathbb{Z}$. Thus it is not a finite field, and our statement has been proven.\\
+\\
+\textbf{\underline{Proposition:}}:\\
+Let $\mathbb{F}$ be a finite field. Then there exists a unique prime $p$, such that $p = 0 \in \mathbb{F}$. \\
+\\
+\textbf{\underline{Proof:}}\\
+As $\mathbb{F}$ is finite, $\exists m,n \in \mathbb{Z} $ such that $m < n$ but $m=n \in \mathbb{F}$. \\
+\\
+Therefore, we have that:
+\begin{equation*}
+z:= m-n=0 \in \mathbb{F}
+\end{equation*}  
+\\
+Thus there exists some $z \in \mathbb{Z}$ such that $z=0 \in \mathbb{F}$ \\
+\\
+Denote $g \in \mathbb{Z}$ to be the element such that $g=0 \in \mathbb{F}$, and $g \leq z$,  $\forall z \in \mathbb{Z}^+$ with $z=0 \in \mathbb{F}$.\\
+\\
+If $g=a \cdot b$ with $1< a,b<g$, then $a \cdot b = 0 \in \mathbb{F}$ with $a,b, \neq 0$.\\
+\\
+But $\mathbb{F}$ is a field, and thus $\exists a^{-1} \in \mathbb{F}$. Hence we have that:\\
+\begin{equation*}
+a\cdot a^{-1} \cdot b = 1 \cdot b = b = 0 \cdot a^{-1}  = 0
+\end{equation*} 
+\\
+Which contradicts that $a,b \neq 0$ and thus $\exists p \in \mathbb{Z}$ such that $p$ is prime and $p=g$ \\
+\\
+If $\exists p,q \in \mathbb{Z}$ both primes such that $q=0, p=0 \in \mathbb{F}$ but $p \neq q$, then as they are both prime, we have that in $\mathbb{F}$:\\
+\begin{equation*}
+1=qs + pt = 0s+0t = 0
+\end{equation*} 
+which is a contradiction, and therefore $p=q$, and there is a unique field such that $p=0$ for $p$ prime.\\
+\\
+\textbf{\underline{Note:}}\\
+We hence note that if $\mathbb{F}$ is a finite field with $p$ elements, for a prime $p$, that $\mathbb{F} = \mathbb{Z}/p\mathbb{Z}$ as $p=0 \in \mathbb{Z}/p\mathbb{Z}$ and this field is unique. We thus denote this field as $\mathbb{F}_p$\\
+\\
+\textbf{\underline{Definition:}} Characteristic of a Field \\
+Let $\mathbb{F}$ be a field. We define the characteristic of $\mathbb{F}$ to be the $p \in \mathbb{Z}$ such that $p=0 \in \mathbb{F}$. We denote this by $char(\mathbb{F})$\\
+\\
+\textbf{\underline{Definition:}} The Multiplicative Group of a Field \\
+We call $( \mathbb{F} ^{*}, \cdot, 1_\mathbb{F} )$ the multiplicative group of a field. We can verify that this satisfies the group axioms. For convenience, we will define $G_\mathbb{F} := ( \mathbb{F} ^{*}, \cdot, 1_\mathbb{F} )$\\
+\\
+\textbf{\underline{Definition:}} Order (of an Element) \\
+Let $r \in \mathbb{F}$. We call the order of $r$, denoted $ord(r)$, the smallest $a \in \mathbb{N}$ such that $r^a = 1_{\mathbb{F}}$\\
+\\
+\textbf{\underline{Example:}}\\
+Let us choose $\mathbb{F}_{5}$. We will examine the order of the elements in $\mathbb{F}_5$. 
+\begin{equation*}
+1^1 = 1, 1^2 = 4, 1^3 = 3, 1^4=1. \text{ hence } ord(1)=1
+\end{equation*}
+\begin{equation*}
+2^1 = 2, 2^2 = 4, 2^3 = 3, 2^4=1. \text{ hence } ord(2)=4
+\end{equation*}
+\begin{equation*}
+3^1 = 3, 3^2 = 4, 3^3 = 2, 3^4=1. \text{ hence } ord(3)=4
+\end{equation*}
+\begin{equation*}
+4^1 = 4, 4^2 = 1, 4^3 = 4, 2^4=1. \text{ hence } ord(4)=2
+\end{equation*}
+Thus we have seen the order of all elements in $\mathbb{F}_5 ^*$\\
+\\
+\textbf{\underline{Definition:}} The Prime Subfield of a Field \\
+We call the smallest subset $P$ of $\mathbb{F}$ which is itself a field the prime subfield of F.\\
+\\
+\textbf{\underline{Proposition:}} \\
+The prime subfield $P$ of $\mathbb{F}$ is isomorphic to $\mathbb{F}_p$. \\
+\\
+\textbf{\underline{Proof:}} \\
+We define the morphism: 
+\begin{equation*}
+h: \mathbb{F}_p \rightarrow \mathbb{F} 
+\end{equation*} 
+with
+\begin{equation*}
+h(x) = x\cdot 1 := 1+1+\ldots+1 +1 \text{ (x times) for } x \in   \mathbb{F}_p
+\end{equation*} 
+We verify that this is a morphism as it preserves addition:
+\begin{equation*}
+h(a+b) = (a+b) \cdot 1 = a\cdot 1 + b \cdot 1 = h(a) + h(b) \text{ for } a,b \in   \mathbb{F}_p
+\end{equation*} 
+and it preserves multiplcation
+\begin{equation*}
+h(a\cdot b) = (a \cdot b)\cdot 1 = (a \cdot 1)\cdot (b\cdot 1) = h(a) \cdot h(b) \text{ for } a,b \in   \mathbb{F}_p
+\end{equation*} 
+while we have:
+\begin{equation*}
+h(1) = 1 \cdot 1 = 1 \text{ for } 1 \in   \mathbb{F}_p
+\end{equation*} 
+We will now show this is in fact an isomorphism. First, we will show this is injective.
+\begin{equation*}
+Ker(h) = \{ f \in \mathbb{F}_p : h(f) = 0 \}
+\end{equation*} 
+But by definition of $h$:
+\begin{equation*}
+Ker(h) = \{ f \in \mathbb{F}_p : f \cdot 1 = f = 0 \}
+\end{equation*} 
+and so:
+\begin{equation*}
+Ker(h) = \{0\} \iff \text{h is injective}
+\end{equation*} 
+We will now show that $h$ is surjective. Recall:
+\begin{equation*}
+h\text{ is not surjective if } \exists a, b \in \mathbb{F}_p\text{ with } a\neq b \text{ such that } h(a)=h(b)
+\end{equation*}
+But by definition of $h$:
+\begin{equation*}
+h\text{ is not surjective if } \exists a, b \in \mathbb{F}_p\text{ with } a\neq b \text{ such that } a=b \text{ which is a contradiction!}
+\end{equation*}
+Hence $h$ is an injective and surjective morphism, and thus $h$ is an isomorphism.\\
+\\
+Therefore, we have that $\mathbb{F}_p \cong Im(h)$. But $1$ is in every subfield of $\mathbb{F}$ (as otherwise it is not a field), and thus contains $x \cdot 1$ for $x \in \mathbb{F}_p$, and therefore its prime subfield $P = Im(h) \cong \mathbb{F}_p$, and therefore we have that $P \cong \mathbb{F}_p$ as claimed.\\
+\\
+\textbf{\underline{Definition:}} Generator \\
+If $\exists r \in \mathbb{F}$ such that $< r > = \{ r^{1}, r^{2}, r^{3}, \dots , r^{q-2}, r^{q-1} = 1 \}= ( \mathbb{F}_{q} ^{*}, \cdot, 1_\mathbb{F} )$\, then we call $r$ the generator of $\mathbb{F}^{*}$.\\
+\\
+\textbf{\underline{Example:}}\\
+Let us choose $\mathbb{F}_{5}$. We observe that $<2>$  $= \{2^1 =2,2^2=4,2^3=3,1\} = \mathbb{F}_{5}$. Hence $2$ is a generator of $\mathbb{F}_{5}$. \\
+\\
+\textbf{\underline{Lemma:}} \\
+For every finite field, there exists at least one generator.\\
+\\
+\textbf{\underline{Proof:}} \\
+We have to show that $X_\mathbb{F}$ is cyclic. Let $|\mathbb{F}| = q$. Then $| X_\mathbb{F}| = q-1$. By Lagrange's Theorem, $ord(f) | q-1$  $\forall f \in \mathbb{F}$.\\
+\\
+We will omit the remainder of the proof which may be found at \cite{Algebra} as the proof of Theorem 15.7.3(C)] as it relies on The Structure Theorem which is outside the scope of this paper.\\
+\\
+\textbf{\underline{Definition:}} Order (of a Field) \\
+Let $\mathbb{F}$ be a field. We define the order of $\mathbb{F}$ to be the $q \in \mathbb{N}$ such that $| \mathbb{F} | = q$. That is to say the order of a finite field is the number of elements in that field. We denote this as $\mathbb{F}_q$, and we will later show that for each $q$, this refers to a unique (up to isomorphism) field.\\
+\\
+\textbf{\underline{Theorem:}} \\
+For every finite field $| \mathbb{F}_q| =q= p^{n}$ with $p \in \mathbb{N} $ prime, and $n \in \mathbb{N}$. \\
+\\
+\textbf{\underline{Proof:}} \\
+Let $char(\mathbb{F}) = p$. We have shown that this contains the prime subfield $\mathbb{F}_p$. Then $F$ has an operation $+$, and we can define multiplication by scalars as:
+\begin{equation*}
+\cdot: \mathbb{F}_p \times  \mathbb{F} \rightarrow \mathbb{F} 
+\end{equation*}
+by \\
+\begin{equation*}
+(x, f) = x \cdot f \text{ with } x \in \mathbb{F}_p \text{ and } f \in \mathbb{F}
+\end{equation*}
+\\
+such that $\mathbb{F}$ with $+$ and $\cdot$ satisfy the properties of a vector space, since $\mathbb{F}_p \subset \mathbb{F}$. Hence we have that $\mathbb{F}$ is a vector space over $\mathbb{F}_p$. Hence as $\mathbb{F}$ is finite with $dim(\mathbb{F})=n$ for some $n \in \mathbb{N}$, we have that $\mathbb{F} \cong \mathbb{F}_{p} ^{n}$ as a vector space.\\
+\\
+Thefore $|\mathbb{F}| = |\mathbb{F}_{p} ^{n}| = p^n$.\\
+\\
+\textbf{\underline{Definition:}} Polynomial Rings\\
+Let $R$ be a ring. A polynomial in x of the form:
+\begin{equation*}
+p(x)=a_n x^n + a_{n-1} x^{n-1} + \ldots+ a_1 x^1 + a_o \text{ such that  } a_i \in R \text{ } \forall i \in \{0, 1, \ldots n-1, n\} \text{ with } n \in \mathbb{N}^*
+\end{equation*}
+is a polynomial in $R$. The set of all polynomials in $R$ is denoted $R[X]$\\
+\\
+\textbf{\underline{Note:}}\\
+It can easily be verified that $(R[X], +, \cdot)$ is a ring, with the usual definition of addition and multiplication of polynomials. Furthermore, we can show that if $R$ is a commutative ring, then $R[X]$ is commutative.\\
+\\
+\textbf{\underline{Question:}}\\
+We know now that fields of the form $p^n$ are possible, but how do we construct fields where $n >1$?\\
+\\
+\textbf{\underline{Answer:}}\\
+We will show that this can be done by adjoining a root of a primitive polynomial to $\mathbb{F}_p [x]$. This new field is an 'extension' of $\mathbb{F}_p$. We will motivate this with an example. \\
+\\	
+\textbf{\underline{Example:}}\\
+Construct the field $\mathbb{F}_4$.\\
+\\
+\textbf{\underline{Solution to Example:}}\\
+First, we take the field $\mathbb{F}_2 = \{0,1\}$, and examine the polynomial ring $\mathbb{F}_{2}[X]$. We define $S:= \{p(x) : p(x) \in \mathbb{F}_2 [X] \text{ and } deg(p(x)) \leq 2\} $. Then:
+\begin{equation*}
+S= \{0\text{, }1\text{, }x + 0\text{, }x + 1\text{, }x^2 + 1\text{, }x^2 + 0\text{, }x^2 + x + 0\text{, } x^2 + x + 1\}
+\end{equation*}
+Secondly, we observe that the polynomial $x^2 + x + 1$ is the only irreducible polynomial in $F_2 [X]$ with $deg(p(x)) \leq 2$ and neither $0$ nor $1$ is a root of the polynomial. We will call $i$ the root of the polynomial \\
+\\
+By taking $\mathbb{F}_{2}[X] / <x^2 + x + 1>$ we see that the elements are:
+\begin{equation*}
+\mathbb{F}_{2}[X] /<x+2 + x + 1> = \{ 0, 1, i, 1+i \}
+\end{equation*}
+We can verify that this is indeed a field, that this field has four elements, and we see that this field has characteristic $2$ with a prime subfield of $\mathbb{F}_2$\\
+\\
+\textbf{\underline{Theorem:}}\\
+Let $\mathbb{F}_q$ be a field where $q=p^n$ with $p$ prime and $n \in \mathbb{N}$. Then $a \in \mathbb{F}_q$ is a root of the polynomial $x^q - x$.\\
+\\
+\textbf{\underline{Proof:}}\\
+Let $\mathbb{F}_q$ be a field. Then $X_\mathbb{F} \cong C_{q-1}$, and thus $ord(f)\text{ }|\text{ }q-1 \text{ } \forall f \in X_\mathbb{F}$\\
+\\
+Therefore $f^{q-1} -1 = 0$, and thus $f$ is a root of $x^{q-1} -1$. We also observe that $0$, which is in $\mathbb{F}_q$, is a root of $x$. Hence $\forall f \in \mathbb{F}_q$, we have that $f$ is a root of $x\cdot (x^{q-1} -1)$, and hence $f$ is a root of $x^q - x$.\\
+\\
+\textbf{\underline{Proposition:}} \\
+There exists a field $\forall q=p^n$ such that $\mathbb{F}_q$ is a field. Furthermore, if $\mathbb{F}$ and $\mathbb{G}$ are finite fields such that $| \mathbb{F}| = |\mathbb{G}| = q$, then $\mathbb{F} \cong \mathbb{G}$\\
+\\
+\textbf{\underline{Proof:}}\\
+We will be omitting the proof of this result as the topic of splitting fields is beyond the scope of this paper, and the proof of this result relies heavily on this topic. We will instead direct the reader to
+\\
+\cite{Algebra} Chapter 15 - Fields - Page 461 Theorem 15.7.3 (d) and \cite{Algebra} Chapter 15 - Fields - Page 462 Theorem 15.7.3\\
+\\
+\pagebreak
+\subsection{Free Modules, Presentation Matrices, and Group Generators}\label{section:Free Groups}
+In this section we will examine free modules and presentation matrices. These topics will be essential in justifying our analysis of the pre-Bloch group over a finite field. This will also allow us to justify our usage of linear algebraic techniques to identify identities and to attempt to determine the size of this group by examining the properties of certain matrices. The exposition in this section is based on Chapter 14 of \cite{Algebra}. Throughout this section we will go with the convention that unless otherwise stated, $R$ refers to a non-zero ring. \\
+\\
+\textbf{\underline{Definition:}} Free Module \\
+Let $R$ be a ring. Let $M$ be an $R$-Module. We say that $M$ is a free module if there exists a basis, with the usual definition which we will explicity give below, of $M$.\\
+\\
+\textbf{\underline{Example:}} \\
+Let $R$ be a ring. Then R is a free module as any unit of $R$ is a basis, and thus the module is of rank $1$.\\
+\\
+\textbf{\underline{Definition:}} Generator: \\
+Let $R$ be a ring, and let $M$ be an $R$-module. We say that
+\begin{equation*}
+S:=\{m_1, m_2, \ldots, m_n : m_i \in M\text{ } \forall i \leq n\}
+\end{equation*}
+generates $M$ if
+\begin{equation*}
+m=r_1 m_1 + r_2 m_2 + \ldots r_{n-1} m_{n-1} + r_n m_n \text{ } \forall m \in M \text{, where } r_i \in R \text{ and } m_i \in M.
+\end{equation*}
+We denote this by saying $span(S)=M$, and we say that the elements of $S$ are generators. If $\exists S$ such that $span(S)=M$ and $|S|$ is finite, we say that the module $M$ is finitely generated by $S$.\\
+\\
+\textbf{\underline{Definition:}} Linear Independance \\
+Let $R$ be a ring, and let $M$ be an $R$-module. We say that for
+\begin{equation*}
+S:=\{m_1, m_2, \ldots, m_n : m_i \in M\text{ } \forall i \leq n\}
+\end{equation*}
+the elements of $S$ are linearly independent if 
+\begin{equation*}
+0=r_1 m_1 + r_2 m_2 + \ldots r_{n-1} m_{n-1} + r_n m_n \implies r_1 = \ldots = r_n = 0 \text{, where } r_i \in R \text{ and } m_i \in S.
+\end{equation*}
+\\
+\textbf{\underline{Definition:}} Basis \\
+Let $R$ be a ring, and let $M$ be an $R$-module. We say that 
+\begin{equation*}
+B:=\{m_1, m_2, \ldots, m_n : m_i \in M\text{ } \forall i \leq n\}
+\end{equation*}
+is a basis of $M$ if the follow criteria are met:
+\begin{itemize}
+	\item $Span(B)= M$
+	\item The elements of $B$ are linearly independant.
+\end{itemize}
+\textbf{\underline{Note:}}\\
+We define $B$ as the set of elements of $M$ as an $R$-module. The set $E=\{e_1,e_2,\ldots,e_n\}$ is a basis of $R^n$. We can define a homomorphism of modules by multplying by $B$. Namely: 
+\begin{equation*}
+B: R^n \rightarrow M
+\end{equation*}
+\begin{equation*}
+B(X) = (m_1, m_2, \ldots, m_n)  
+\begin{pmatrix}
+x_1\\
+x_2\\
+\vdots\\
+x_n
+\end{pmatrix}
+= \sum_{i=1}^{n} m_i x_i
+\end{equation*}
+$B$ is a basis if and only if this map is isomorphic, and therefore $M$ is a free module if and only if there is a basis.\\
+\\
+\textbf{\underline{Theorem:}}\\
+If $A$ is an integer matrix, then there are elementary integer matrices  $Q$ and $P$, which originate from row and column operations, such that:
+\begin{equation*}
+A'=Q^{-1} \cdot A \cdot P
+\end{equation*}
+where $A'$ is of the form:
+\[ A'= \left( \begin{array}{cc}
+\left[\begin{array}{ccc}
+    d_{1} &  & \\
+     &\ddots & \\
+      & & d_k
+    \end{array}\right] & \\
+     & 0\\   \end{array}\right) \]
+\\
+with $d_1 | d_2 | d_3 | \ldots | d_k$ and $k \leq n$\\
+\\
+\textbf{\underline{Proof:}}\\
+The proof shall be omitted, but may be found in \cite{Algebra} as the Proof of Theorem 14.4.6\\
+\\
+\textbf{\underline{Note:}}\\
+When diagonalising integer matrices, as we do not have inverses $\forall z \in \mathbb{Z}$, the row and column operations we can do are restricted.  As highlighted in [Artin, page 418] row and column operations are restricted to the following:
+\begin{itemize}
+	\item Multiply a column or row by $-1$
+	\item Add an integer multiple of a row to another, or an integer multiple of a column to another.
+	\item Swap the position of two rows or columns
+\end{itemize}
+\textbf{\underline{Example:}} \\We will diagonalise the following integer matrix:
+
+\[ M = \left( \begin{array}{cccccc}
+ 3 &0&-1&1&0&-1 \\
+ -2&1&0&2&1&0\\
+ 0&0&2&-2&0&2  
+\end{array}\right) \]
+We will add the second and third row to the first row.
+\[ M = \left( \begin{array}{cccccc}
+1 &1&1&1&1&1 \\
+-2&1&0&2&1&0\\
+0&0&2&-2&0&2  
+\end{array}\right) \]
+We will subtract the first column from the remaining columns.
+\[ M = \left( \begin{array}{cccccc}
+1 &0&0&0&0&0 \\
+-2&3&2&4&3&2\\
+0&0&2&-2&0&2  
+\end{array}\right) \]
+We will add twice the first row to the second row.
+\[ M = \left( \begin{array}{cccccc}
+1 &0&0&0&0&0 \\
+0&3&2&4&3&2\\
+0&0&2&-2&0&2  
+\end{array}\right) \]
+We will rearrange the columns so that the values in the second row are ordered.
+\[ M = \left( \begin{array}{cccccc}
+1 &0&0&0&0&0 \\
+0&2&2&3&3&4\\
+0&2&2&0&0&-2  
+\end{array}\right) \]
+We will subtract $gcd(a_{2,1},a_{2,j})$ times the second column from column $j$
+\[ M = \left( \begin{array}{cccccc}
+1 &0&0&0&0&0 \\
+0&2&0&1&1&0\\
+0&2&0&-2&-2&-6  
+\end{array}\right) \]
+We will reorder the columns such that the second row is ordered.
+\[ M = \left( \begin{array}{cccccc}
+1 &0&0&0&0&0 \\
+0&0&0&1&1&2\\
+0&0&-6&-2&-2&2  
+\end{array}\right) \]
+We will subtract We will subtract $gcd(a_{2,4},a_{2,j})$ times the fourth column from column $j$
+\[ M = \left( \begin{array}{cccccc}
+1 &0&0&0&0&0 \\
+0&0&0&1&0&0\\
+0&0&-6&-2&0&6  
+\end{array}\right) \]
+We'll subtract $gcd(a_{2,4},a_{i,4})$ from row $i$
+\[ M = \left( \begin{array}{cccccc}
+1 &0&0&0&0&0 \\
+0&0&0&1&0&0\\
+0&0&-6&0&0&6  
+\end{array}\right) \]
+We'll rearrange to place zero columns in the final columns of the matrix and $1$ in $a_{2,2}$ 
+\[ M = \left( \begin{array}{cccccc}
+1 &0&0&0&0&0 \\
+0&1&0&0&0&0\\
+0&0&-6&6&0&0  
+\end{array}\right) \]
+We multiply all columns containing a negative value by $-1$ and subtract the third column from the fourth column to arrive at our final answer
+\[ M = \left( \begin{array}{cccccc}
+1 &0&0&0&0&0 \\
+0&1&0&0&0&0\\
+0&0&6&0&0&0  
+\end{array}\right) \]
+\textbf{\underline{Note:}}\\
+We note that when we are dealing with rings, not all modules are free. There are modules which simply do not have a basis. To describe some of these modules we will use matrices referred to as "Presentation Matrices". These matrices shall be fundamental in our examination of the pre-Bloch group over a finite field.\\
+\\
+\textbf{\underline{Definition:}} Presentation Matrix\\
+Let $A$ denote an $m \times n\text{ }R$-matrix. Then $A$ defines a  homomorphism of $R$-Modules:
+\begin{equation*}
+A:R^n \rightarrow R^m
+\end{equation*}
+\begin{equation*}
+A \cdot \begin{pmatrix}
+x_1\\
+x_2\\
+\vdots\\
+x_n
+\end{pmatrix} = (x_1, x_2, \ldots, x_m)
+\end{equation*}
+We note that the image of this map is all linear combinations of the columns in A with coefficients in $R$, and thus we denote $Im(A)$ by $A \cdot R^n$.\\
+\\
+The quotient module $R^m / Im(A) = R^m / A \cdot R^n$ is then "presented" by the matrix $A$, and we call $A$ the presentation matrix of $M$. More formally, we state:\\
+\\
+If  $\exists f: R^m / A\cdot R^n \rightarrow M$ such that $f$ is an isomorphism, and $A$ is an $m \times n$ matrix, we call $f$ the presentation of the module $M$, and $A$ is the presentation matrix of $M$.\\
+\\
+\textbf{\underline{Example:}}\\
+What is the presentation matrix of $C_5$ and $C_7$?\\
+\\
+We note that $C_5 \cong \mathbb{Z} \backslash5\mathbb{Z}$ with $5 \in \mathbb{Z}$, and likewise $C_7 \cong \mathbb{Z} \backslash7\mathbb{Z}$ with $7 \in \mathbb{Z}$. Hence the matrix $[5]$ presents $C_5$ and the matrix $[7]$ presents $C_7$. \\
+\\
+\textbf{\underline{Definition:}} Relation Vector\\
+Let $M$ be an $R$-Module. If $M$ is generated by a set $B=\{b_1, b_2, \ldots, b_n\}$, we call a vector $X \in R^m$ such that $B\cdot X = 0$ a relation vector. \\
+\\
+\textbf{\underline{Definition:}} Relation\\
+Let $M$ be an $R$-Module. Let $B$ be a set such that $Span(B)=M$. Let $X$ be a relation vector. We call $\sum_{i=1}^{m} b_i x_i = 0$ with $b_i \in B$ and $x_i \in X$ a relation.\\
+\\
+\\
+\textbf{\underline{Definition:}} Complete Set of Relations\\
+Let $M$ be an $R$-Module. Let $B$ be a set such that $Span(B)=M$. We say a set of relations $S$ is a complete set if:
+\begin{equation*} \forall x\text{ such that }x\text{ is a relation vector, }x = \sum_{s \in S} r_s s\text{ for }r_s \in R
+\end{equation*}
+\textbf{\underline{Note:}}\\As the concept of relation vectors (which we will in later sections simply refer to as 'relations') is a concept which will be essential to the study of the pre-Bloch group, we will provide an examples\\
+\\
+\textbf{\underline{Example:}} \\
+Consider the $\mathbb{Z}$-module generated by $\{x_1, x_2, x_3\}$ with the relations:
+
+\begin{itemize}
+	\item $x_1 + x_2 + x_3=0$
+	\item $2 x_1 + -1 x_2 + 3 x_3 = 0$
+	\item $-2 x_1 +4 x_2 + x_3=0$
+\end{itemize}
+This is then presented by the matrix with the coefficients of the relations in the columns:
+
+\[ A = \left( \begin{array}{ccc}
+1 &2&-2 \\
+1&-1&4\\
+1&3&1  
+\end{array}\right) \]
+
+
+
+\pagebreak
+\subsection{Pre-Bloch Group}\label{section:Pre-Bloch Group}
+The relations of the pre-Bloch group over a Finite Field is the main topic of study in this paper. In this section we will give a brief overview of the pre-Bloch group, motivate its study, and provide some results which serve as the basis for our investigation. The study of pre-Bloch group stems from its intricate relation with hyperbolic geometry, in particular its relation to ideal tetrahedra and the dilogarithm function. An exposition on these connections may be found in: \cite{ArithmeticHyperbolic} and \cite{Zagier2007}. \\
+\\
+\textbf{\underline{Definition}}: The pre-Bloch group, $\mathcal{P}(\mathbb{F})$  \\Let us define the function, which we will call the "five term relation", where the terms are those of the dilogarithm function in \cite{Zagier2007}:\\
+\begin{equation*}
+R:  \mathbb{Z} [\mathbb{F}_{q}  \backslash \{0,1\}] \times \mathbb{Z} [\mathbb{F}_{q}  \backslash \{0,1\}]  \rightarrow \mathbb{Z} [\mathbb{F}_{q}  \backslash \{0,1\}]\text{ by}:
+\end{equation*}
+
+\begin{equation*}
+R(x,y) = [x] - [y] + [\frac{y}{x}] - [\frac{1-x^{-1}}{1-y^{-1}}] + [\frac{1-x}{1-y}] \label{equation:R Formula }
+\end{equation*}
+\\
+for $x \neq y$.\\ The pre-Bloch group $\mathcal{P}(\mathbb{F})$ is the abelian group generated by the symbols $[x]$, with $x \in \mathbb{F}_{q}  \backslash \{0,1\}$, subject to the relation $R(x,y)=0$  \cite{DUPONT1982159}.\\
+\\
+The Bloch Group, $\mathcal{B}(\mathbb{F})$ is then taken to be the kernel of the map:
+\begin{equation*}
+f: \mathcal{P}(\mathbb{F}) \rightarrow \mathbb{F}^* \wedge \mathbb{F}^*
+\end{equation*}
+\begin{equation*}
+f([z]) = z \wedge (1-z)
+\end{equation*}
+\\
+\textbf{\underline{Note:}} In certain literature (see: \cite{Zagier2007}), the five term relation may be written instead as:
+\begin{equation*}
+R(x,y)= [x] + [y] + [\frac{1-x}{1-xy}]+[1-xy] + [\frac{1-y}{1-xy}] 
+\end{equation*}
+with the Bloch Group defined as:
+\begin{equation*}
+\mathcal{B}(\mathbb{F}) := \frac{\{[z_1] + [z_2] + \ldots +[z_n] : z \text{ satisfies } \sum\limits_{v=1}^{n} (z_v \wedge (1-z_v)) \}}{(\text{subgroup generated by: } [x] + [x^{-1}], [x] + [1-x], [x] + [y] + [\frac{1-x}{1-xy}]+[1-xy] + [\frac{1-y}{1-xy}] )}
+\end{equation*}
+For this paper, we will be using our initial definition. \\ 
+\\
+\textbf{\underline{Note:}}\\
+We note that as $\mathcal{P}(\mathbb{F})$ is generated by a finite set when $\mathbb{F} = \mathbb{F}_q$, with a finite set of relations (of size $(q-2)\cdot (q-3)$ as $x \neq y$), we are able to analyse $\mathcal{P}(\mathbb{F})$ by examining the presentation matrix of $\mathcal{P}(\mathbb{F})$. It is this approach that shall form the basis of this study. We will start by giving an example. \\
+\\ 
+\textbf{\underline{Example:}} \\Let us choose consider the relations for $\mathbb{F}_5$. We have: \\
+\begin{equation*}
+R:  \mathbb{Z}[\mathbb{F}_{5}  \backslash \{0,1\}] \times\mathbb{Z}[ \mathbb{F}_{5}  \backslash \{0,1\}] \rightarrow \mathbb{Z} [\mathbb{F}_{5}  \backslash \{0,1\}] \text:
+\end{equation*}
+
+\begin{equation*}
+R(2,3) = [2] - [3] + [\frac{3}{2}] - [\frac{1-2^{-1}}{1-3^{-1}}] + [\frac{1-2}{1-3}] = 0[2] + 0[3] + 1[4]
+\end{equation*}
+\begin{equation*}
+R(2,4) = [2] - [4] + [\frac{4}{2}] - [\frac{1-2^{-1}}{1-4^{-1}}] + [\frac{1-2}{1-4}] = 3[2] -2[4] + 0[3]
+\end{equation*}
+\begin{equation*}
+R(3,2) = [3] - [2] + [\frac{2}{3}] - [\frac{1-3^{-1}}{1-2^{-1}}] + [\frac{1-3}{1-2}] = 0[2] + 0[3] + 1[4] 
+\end{equation*}
+\begin{equation*}
+R(3,4) = [3] - [4] + [\frac{4}{3}] - [\frac{1-3^{-1}}{1-4^{-1}}] + [\frac{1-3}{1-4}] = -1[2] + 2[3] + 0[4]
+\end{equation*}
+\begin{equation*}
+R(4,2) = [4] - [2] + [\frac{2}{4}] - [\frac{1-4^{-1}}{1-2^{-1}}] + [\frac{1-4}{1-2}] = -1[2] + 2[3] + 0[4]
+\end{equation*}
+\begin{equation*}
+R(4,3) = [4] - [3] + [\frac{3}{4}] - [\frac{1-4^{-1}}{1-3^{-1}}] + [\frac{1-4}{1-3}] = 1[2] -2[3] +2[4] 
+\end{equation*}
+Thus the presentation matrix of $\mathcal{P}(\mathbb{F})$ is:
+\[ M = \left( \begin{array}{cccccc}
+0 &3&0&-1&-1&1 \\
+0&-2&0&2&2&-2\\
+1&0&1&0&0&2  
+\end{array}\right) \]
+\\
+\textbf{\underline{Note:}}\\ As $\mathbb{F}_{q} ^{*}$ is generated by some $r \in \mathbb{F}_{q} ^{*}$, we can redefine the function in terms of some generator $r$ as:\\
+\begin{equation*}
+R:  \mathbb{Z} [\mathbb{F}_{q}  \backslash \{0,1\} ] \times \mathbb{Z} [\mathbb{F}_{q}  \backslash \{0,1\} ]  \rightarrow \mathbb{Z} [\mathbb{F}_{q}  \backslash \{0,1\} ]  \text{ by}:
+\end{equation*}
+
+\begin{equation*}
+R(r^{i},r^{j}) = [r^{i}] - [r^{j}] + [r^{j-i}] - [\frac{1-r^{-i}}{1-r^{-j}}] + [\frac{1-r^{i}}{1-r^{j}}]
+\end{equation*}
+\textbf{\underline{Example:}}  We observe that $<2>$  $= \{2,4,3,1\} = \mathbb{F}_{5} ^{*}$.  So the relations for $\mathbb{F}_5$, as seen before now in terms of a generator, are: \\
+\begin{equation*}
+R(r^{1},r^{2}) = [r^{1}] - [r^{2}] + [r^{2-1}] - [\frac{1-r^{-1}}{1-r^{-2}}] + [\frac{1-r^{1}}{1-r^{2}}] = 3[r^1] -2[r^2]  + 0[r^3] = \{3,-2,0\}
+\end{equation*}
+\begin{equation*}
+R(r^{1},r^{3}) = [r^{1}] - [r^{3}] + [r^{3-1}] - [\frac{1-r^{-1}}{1-r^{-3}}] + [\frac{1-r^{1}}{1-r^{3}}] = 0[r^1] +1[r^2]  + 0[r^3] = \{0,1,0\}
+\end{equation*}
+\begin{equation*}
+R(r^{2},r^{1}) = [r^{2}] - [r^{1}] + [r^{2-1}] - [\frac{1-r^{-2}}{1-r^{-1}}] + [\frac{1-r^{2}}{1-r^{1}}] = -1[r^1] +0[r^2]  + 2[r^3] = \{-1,0,2\}
+\end{equation*}
+\begin{equation*}
+R(r^{2},r^{3}) = [r^{2}] - [r^{3}] + [r^{2-3}] - [\frac{1-r^{-2}}{1-r^{-3}}] + [\frac{1-r^{2}}{1-r^{3}}] = 1[r^1] +2[r^2]  + -2[r^3] = \{1,2,-2\}
+\end{equation*}
+\begin{equation*}
+R(r^{3},r^{1}) = [r^{3}] - [r^{1}] + [r^{3-1}] - [\frac{1-r^{-3}}{1-r^{-1}}] + [\frac{1-r^{3}}{1-r^{1}}] = 0[r^1] +1[r^2]  + 0[r^3] = \{0,1,0\}
+\end{equation*}
+\begin{equation*}
+R(r^{3},r^{2}) = [r^{3}] - [r^{2}] + [r^{3-2}] - [\frac{1-r^{-3}}{1-r^{-2}}] + [\frac{1-r^{3}}{1-r^{2}}] = -1[r^1]+0[r^2]  + 2[r^3] = \{-1,0,2\}
+\end{equation*}
+\\
+and thus our presentation matrix, now with re-ordered rows and columns, is:
+\\
+\[ M = \left( \begin{array}{cccccc}
+3  & 0  & -1 &  1 &   0 &  -1\\
+-2 &   1 &  0 & 2  & 1 & 0  \\
+0  & 0  & 2 &  -2  & 0 & 2   \end{array} \right)\]
+\\
+\textbf{\underline{Definition:}} $ \{ x \}$ \\ 
+For $x \in \mathbb{F}^*$, we define:
+\begin{equation*}
+\{x \} := \begin{cases}
+[x] + [x^{-1}] \text{ if } x \neq 1\\
+0 \text{ if } x=1
+\end{cases}
+\end{equation*}
+\textbf{\underline{Proposition:}} \\
+It is a well-known result of Suslin \cite{Sus90} that the map $f: x \rightarrow {x}$ is a morphism from $\mathbb{F}^*$ to the elements of order $2$ in $\mathcal{P} (\mathbb{F})$. \\
+\\
+\textbf{\underline{Proof:}} \\
+We note that in the group $\mathcal{P} (\mathbb{F})$ we have the following identities:
+\begin{equation*}
+R(x,y) = [x] - [y] + [\frac{y}{x}] - [\frac{1-x^{-1}}{1-y^{-1}}] + [\frac{1-x}{1-y}] =0
+\end{equation*}
+\begin{equation*}
+R(x^{-1},y^{-1}) = [x^{-1}] - [y^{-1}] + [\frac{y^{-1}}{x^{-1}}] - [\frac{1-x^{1}}{1-y^{1}}] + [\frac{1-x^{-1}}{1-y^{-1}}] =0
+\end{equation*}
+By adding these equations we see:
+\begin{equation*}
+R(x,y) + R(x^{-1},y^{-1})  = [x] - [y] + [\frac{y}{x}] - [\frac{1-x^{-1}}{1-y^{-1}}] + [\frac{1-x}{1-y}] + [x^{-1}] - [y^{-1}] + [\frac{y^{-1}}{x^{-1}}] - [\frac{1-x^{1}}{1-y^{1}}] + [\frac{1-x^{-1}}{1-y^{-1}}] =0 
+\end{equation*}
+and by rearranging and simplifying we get:
+\begin{equation*}
+R(x,y) + R(x^{-1},y^{-1})  = ([x] + [x^{-1}]) - ([y] + [y^{-1}]) + ([\frac{y}{x}]  + [\frac{x}{y}]) =0 
+\end{equation*}
+and by using our definition of $\{x\}$ we get:
+\begin{equation*}
+R(x,y) + R(x^{-1},y^{-1})  =  \{x\} - \{y\} + \{z\} =0 
+\end{equation*}
+However, now observe that we can also interchange $x$ and $y$ to get the relation:
+\begin{equation*}
+R(y,x) + R(y^{-1},x^{-1})  =  \{x\} - \{y\} + \{z^{-1}\} =0 
+\end{equation*}
+And by adding both relations we get:
+\begin{equation*}
+2\{z\} =0 
+\end{equation*}
+We thus verify that $2\{x\}=0 \text{ } \forall x\in \mathbb{F}_q ^* $\\
+\\
+\textbf{\underline{Corollary:}} \\
+From the above, we also see that the relation $\{x\} + \{\frac{y}{x}\} = \{y\}$ holds. This is valid as if $x=y$, $x=1$, the relation is trivial. If $y=1$ then as $\{x\}=\{x^{-1}\}$ we retrieve the relation $2\{x\} =0$. \\
+\\
+\textbf{\underline{Proposition:}} \\
+It is also well-known result of Suslin \cite{Sus90} that in $\mathcal{P}(\mathbb{F})$, $c_{\mathbb{F}} = [x] + [1-x]$ is constant $\forall x \in \mathbb{F} \backslash \{0,1\}$. \\
+\\
+\textbf{\underline{Proof:}} \\
+We note that in the group $\mathcal{P} (\mathbb{F})$ we have the following identities:
+\begin{equation*}
+R(x,y) = [x] - [y] + [\frac{y}{x}] - [\frac{1-x^{-1}}{1-y^{-1}}] + [\frac{1-x}{1-y}] =0
+\end{equation*}
+\begin{equation*}
+R(1-y,1-x) = [1-y] - [1-x] + [\frac{1-x}{1-y}] - [\frac{1-(1-y)^{-1}}{1-(1-x)^{-1}}] + [\frac{1-(1-y)}{1-(1-x)}] =0
+\end{equation*}
+By subtracting the two relations, we see:
+\begin{equation*}
+R(x,y) -  R(1-y,1-x)  = [x] + [1-x] - ([y] + [1-y]) = 0
+\end{equation*}
+and thus we get our desired equality that 
+\begin{equation*} 
+[x] + [1-x] = [y] + [1-y]
+\end{equation*}
+\textbf{\underline{Corollary:}} \\
+$3 c_{\mathbb{F}} = \{-1\}$ \\
+\\
+\textbf{\underline{Proof:}}\\
+We have from the above:
+\begin{equation*}
+3 c_{\mathbb{F}} = [x] + [1-x] + [x^{-1}] + [1-x^{-1}] + [(1-x)^{-1}] + [1-(1-x)^{-1}]
+\end{equation*}
+\begin{equation*}
+3 c_{\mathbb{F}} = \{x\} + \{1-x\} + \{1-x^{-1}\} = \{-(1-x)^2\} = \{-1\}
+\end{equation*}
+\textbf{\underline{Corollary:}}\\
+\begin{equation*}
+6 c_{\mathbb{F}} = 0
+\end{equation*}
+\textbf{\underline{Proof:}}\\
+Recall we have:
+\begin{equation*}
+	3 c_{\mathbb{F}} = \{-1\} 
+\end{equation*}
+Thus:
+\begin{equation*}
+6 c_{\mathbb{F}} = \{-1\} + \{-1\} = 2 \{-1\} 
+\end{equation*}
+And as $2\{x\}=0$ we have our result that:
+\begin{equation*}
+6 c_{\mathbb{F}} = \{-1\} + \{-1\} = 0
+\end{equation*}
+\textbf{\underline{Proposition:}}\\ $\mathcal{P}(\mathbb{F}) \cong C_{q+1}$ and thus the rank of the presentation matrix of $\mathcal{P}(\mathbb{F})$ is maximal.\\
+\\
+\textbf{\underline{Proof:}}\\ This was proved by Hutchinson \cite{1107.0264}. \\
+\\
+\textbf{\underline{Note:}}\\ This proof is what shall form the basis of our research. The proof is based primarily on techniques from homological algebra. It is highly desirable to find a more direct proof of this result so we can get to the essence of the pre-Bloch group to try and determine what precisely is responsible for its structure. In particular, this proof also tell us that the pre-Bloch group over a finite field is itself finite, and thus of maximal rank. This tells us that out of the total $(q-2)\cdot (q-3)$ relations for a finite field $\mathbb{F}_q$, there are in fact $q-2$ of these which are linearly independant. It would be quite interesting to determine which relations, and why, are the linearly independant relations, as these are going to determine the entire pre-Bloch group.\\
+
+\pagebreak
+\section{Main Body}\label{section:Main Body}
+
+We recall our motivating question for this study:\\
+\\
+\textbf{\underline{Question:}} Is it possible to explicitly describe which $q-2$ relations of the total $(q-2)\cdot (q-3)$ relations which are linearly independant using only elementary techniques? \\
+\\
+There are a number of challenges, detailed below, which make this question difficult to answer.\\
+\\
+ \textbf{\underline{Challenge 1:}} The first immediate difficulty one encounters is that the number of relations for a finite field $\mathbb{F}_q$ is $(q-2)\cdot (q-3)$. As the the size of the field increases, the total number of relations grows in polynomial time. Even when the field contains only $13$ elements, there are already a total of $110$ relations, and of these we are looking for $10$ linearly independant relations. As we wish to find a consistent set of relations which are linearly independant regardless of the field, it is necessary to be able to examine a set of relations across a number of fields, to try and identify any pattern which may arise in which relations are linearly independant to one another. As the total number of relations increases very quickly, the size of the matrix becomes very large, and it quickly becomes inefficient to compute all relations by hand, the first step in our study was to write a programme to automate this process.\\
+ \\
+ \textbf{\underline{Challenge 2:}} The second difficulty which arises is how we should try to  choose which relations to select. Ideally, we would like to arrange our presentation matrix such that the first $q-2$ columns (which correspond to a relation) are linearly independant, and the remaining columns are those which are linearly dependant (and thus may be removed).There are two obvious methods which can be used to order elements of a finite field. The first method consists of a simple lexographic ordering. The second method consists of considering the elements in finite field as powers of a generator of the multiplicative group of the finite field, and ordering them according to the power of this generator. We need to determine some way to choose which elements of the finite field to select for our relations, and this is something which is non-obvious. \\
+\\
+\textbf{\underline{Challenge 3:}} The third challenge which presents itself is the lack of information we have about the connection between addition and multiplication in a finite field. This proves to be an important point as determing what the terms
+\begin{equation*}
+[\frac{1-x^{-1}}{1-y^{-1}}] \text{ and } [\frac{1-x}{1-y}]
+\end{equation*}
+from the five term relation will be as a power of a generator in the field is important to determing what the coefficient is of each element of the field for a given relation. These terms are highly variable to what elements in the field we choose for the relation. Finding identities that allow us to restrict what these terms can be, and impose further conditions on the relations will be particularly important. Because of how variable a relation is depending on which elements of the field are selected, it is entirely possible that there may not be a consistent set of relations which are linearly independant in every field; it may simply depend entirely on the field that we choose. \\
+\\
+\textbf{\underline{Challenge 4:}} The fourth and final difficulty which presents itself is that while we know the entire group is generated by a single element, we do not have a description as to what this element is. This problem is comparable to determining what element of a finite field is a generator, a problem for which we currently have no general solution for.
+
+Various methods of attacking this problem were tried over the course of this study, and we will provide details on the main results which we achieved, including a general lower bound on the rank of the presentation matrix, and the main techniques which were used below.
+\pagebreak
+\subsection{Program to Calculate the Pre-Bloch Group }\label{section:Computational Program}
+As the number of relations grows very quickly with the size of the field, the beginning of this investigation necessitated the writing of a computer program which would allow the pre-Bloch group of a finite field to be written quickly. \\
+\\
+To accomplish this, I used Mathematica, a computational program based on the 'symbolic language' known as "Wolfram Language" ( www.wolfram.com/mathematica/ ). The main motivators for using Mathematica over other computational programs was the support for "Finite Fields" through the "Finite Fields Package" (reference.wolfram.com/language/FiniteFields/tutorial/FiniteFields.html), and the author's own familiarity with the program. The author is confident that similar computational programs which support finite fields, such as "Sage Math" or "Matlab", could implement a similar algorithm. Similarly, the program has not been optimised for efficiency as its primary purpose was to simply allow for the quick calculation of the presentation matrix. It is very likely that there are a number of optimisations which could be made to this program.\\
+\\
+Our program is as follows. We will supply and explain each piece of the code individually, and we will then at the end provide the program in its entirety\\
+\\
+\textbf{\underline{Code Input:}}
+\begin{verbatim}
+Needs["FiniteFields`"]
+Needs["IntegerSmithNormalForm`"] 
+\end{verbatim}
+\textbf{\underline{Code Output:}}
+\begin{verbatim}
+-Not Applicable-
+\end{verbatim}
+ \textbf{\underline{Explanation:}} The first package loaded allows for the manipulation of finite fields. The second package provides an implementation which allows matrices to be put in Smith Normal Form using only the row and column manipulations which are allowed to be used for an integer matrix. This pacakage was written by Dr. Jabon and is available at (http : // library.wolfram.com/infocenter/MathSource/682/).\\
+ \\
+ \textbf{\underline{Code Input:}}
+ \begin{verbatim}
+ FieldPowers[m_] := PowerList[GF[m]]
+ Table[PowerListQ[GF[Prime[i]]] = True, {i, 80}]
+ PowerListQ[GF[5]]
+ Table[PowerListQ[GF[Prime[i]^2]] = True, {i, 20}]
+ Table[PowerListQ[GF[Prime[i]^3]] = True, {i, 15}]
+ Table[PowerListQ[GF[Prime[i]^4]] = True, {i, 10}]
+ \end{verbatim}
+ \textbf{\underline{Code Output:}}
+ \begin{verbatim}
+ {Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, \
+ Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, \
+ Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, \
+ Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, \
+ Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, \
+ Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, \
+ Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, \
+ Null, Null, Null}
+ 
+ True
+ 
+ {Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, \
+ Null, Null, Null, Null, Null, Null, Null, Null, Null}
+ 
+ {Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, Null, \
+ Null, Null, Null, Null}
+ 
+ {Null, Null, Null, Null, Null, Null, Null, Null, Null, Null}
+ \end{verbatim}
+ \textbf{\underline{Explanation:}} We start by defining a function called "FieldPowers[m]", where $m$ refers to the order of the field. This function outputs the result as a vector whose length corresponds to the degree of the polynomial used to generate the elements of the field. This function outputs the elements of a given field by determining a generator of the field and returning the element as powers of that generator, where the first element corresponds to $r^{q-1}$, the second element corresponds to $r^1$, etc. Further details on which polynomials and generators Mathematica uses to generate these elements may be found in the documentation of the finite fields package. The convention Mathematica uses is that a vector $\{v_0, v_1, v_2\}$ corresponds to the polynomial $v_0 + v_1 x^1 + v_2 x^2$. \\
+ \\
+ We next begin by enabling the ability to take the discrete logarithm of an element of a given field. This must be manually enabled for every field. To take "Table[PowerListQ[GF[Prime[i]]] = True, {i, 80}]" as an example, this enables the ability to take the discrete logarithm of the fields $\mathbb{F}_p$ where $p$ is one of the first $80$ prime numbers. Subsequent instances enable the ability to take the discrete logarithm of extensions of a set number of fields. This function is computationally heavy, but it can easily be adjusted to enable the discrete logarithm for as many fields as one is interested in by increasing the bound of each line to include the desired number of fields.\\
+ \\
+ \textbf{\underline{Code Input:}}
+ \begin{verbatim}
+ FieldPowers[4]
+ Print["The above is the list of F4"]
+ FieldPowers[5]
+ Print["The above is the list of F5"]
+ FieldPowers[7]
+ Print["The above is the list of F7"]
+ \end{verbatim}
+ \textbf{\underline{Code Output:}}
+ \begin{verbatim}
+{{1, 0}, {0, 1}, {1, 1}}
+ 
+The above is the list of F4
+ 
+ {{1}, {2}, {4}, {3}}
+ 
+The above is the list of F5
+ 
+{{1}, {3}, {2}, {6}, {4}, {5}}
+ 
+The above is the list of F7
+ \end{verbatim}
+ \textbf{\underline{Explanation:}} Here we see examples to verify that the function "FieldPowers[x]" correctly returns the vectors associated with the elements in the field $\mathbb{F}_x$. One important point here is that these vectors are not returned as elements in the field. This means addition between two vectors, say $3$ and $4$ in "FieldPowers[5]" will return $7$, rather than the desired $2$. We verify that these are indeed the elements of the fields $\mathbb{F}_4$,$\mathbb{F}_5$, and $\mathbb{F}_7$. \\
+ \\
+ \textbf{\underline{Code Input:}}
+ \begin{verbatim}
+ 
+Id[x_] := First[FieldPowers[x]]
+
+Id[4]
+Id[5]
+Id[7]
+ \end{verbatim}
+ \textbf{\underline{Code Output:}}
+ \begin{verbatim}
+ {1, 0}
+ 
+ {1}
+ 
+ {1}
+ \end{verbatim}
+ \textbf{\underline{Explanation:}} This defines a new function called "Id[x]" which takes as an input the order of our field, and returns as an output the identity of that field by taking the first element of our function "FieldPowers[x]" (which recall is ordered such that the first element is the identity, the generator of the field is the second element, and subsequent elements are successive powers of the generator). We verify that this correctly returns the identity element for each of $\mathbb{F}_4$,$\mathbb{F}_5$, and $\mathbb{F}_7$.  \\
+ \\
+ \textbf{\underline{Code Input:}}
+ \begin{verbatim}
+FL1[x_] := DeleteCases[FieldPowers[x], Id[x]]
+
+FL1[4]
+FL1[5]
+FL1[7]
+ \end{verbatim}
+ \textbf{\underline{Code Output:}}
+ \begin{verbatim}
+ {{0, 1}, {1, 1}}
+ 
+ {{2}, {4}, {3}}
+ 
+ {{3}, {2}, {6}, {4}, {5}}
+ \end{verbatim}
+ \textbf{\underline{Explanation:}} We define a new function "FL1[x]" which takes the order of a field as an input, and returns the elements in $\mathbb{F}_x \backslash \{1\}$. This is ordered according to powers of a generator, where the generator is the first element. We verify that $FL1[4]$, $FL1[5]$, and $FL[7]$ return the correct values.\\
+ \\
+ \textbf{\underline{Code Input:}}
+ \begin{verbatim}
+G[p_, a_] := 
+If[Mod[a, p - 1] != 0, Part[FL1[p], Mod[a, p - 1]], Id[p]]
+(*This is going to give the element of the field which corresponds to \
+power a of a generator in a field p*)
+
+
+G[5, 2]
+G[5, 3]
+G[5, 4] == Id[5]
+ \end{verbatim}
+ \textbf{\underline{Code Output:}}
+ \begin{verbatim}
+{4}
+
+{3}
+
+True
+ \end{verbatim}
+ \textbf{\underline{Explanation:}} We definite a new function $G[p,a]$ which takes the order of the field as $p$ and the power of a generator of that field as $a$, and then outputs the vector which corresponds to $r^a$. It does this by first determing if $a$ is the identity. If it is the identity, it returns the identity. If it is not the identity, it takes the element in FL1[p] which corresponds to the power of the generator given. It takes this modulo $p-1$ to ensure powers higher than this return correct answers. We see examples that verify this is working correctly by examining the field $\mathbb{F}_5$ \\
+ \\
+\textbf{\underline{Code Input:}}
+\begin{verbatim}
+FY[p_, a_] := GF[p][G[p, a]]
+Field[p_] := Table[FY[p, i], {i, 1, p - 2}]
+FOne[p_] := GF[p][Id[p]]
+FY[5, 1]
+FY[5, 2]
+FY[5, 3]
+FY[5, 4]
+FY[4, 1]
+FY[4, 2]
+FY[4, 3]
+FY[7, 1]
+FY[(Prime[10])^2, 17]
+\end{verbatim}
+\textbf{\underline{Code Output:}}\\
+$
+\{2\}_5\\
+\{4\}_5\\
+\{3\}_5\\
+\{1\}_5\\
+\{0,1\}_2\\
+\{1,0\}_2\\
+\{3\}_7\\
+\{8,26\}_{29}\\
+$
+
+
+\textbf{\underline{Explanation:}} Here we define "FY[p,x]" to place the element into the field and allow arithmetic to be done inside that field. In Mathematica, this is accomplished using the function "GF[p][v]", where "v" corresponds to the vector of the element in that field. Here, we substituted our function "G[p,a]" for "v" as this function returns the vector of the element associated with $r^a$ in the field $\mathbb{F}_p$ (where p in this case is a prime or a power of a prime). FY[p,a] therefore outputs the element $r^a$ when considered as an elment in the field.\\
+\\
+The function "Field[p]" outputs every element in a field $\mathbb{F}_p$ ,where $p$ is the order of the field (prime, or a power of a prime), considered by Mathematica as an element of the field.\\
+\\
+The function "FOne[p]" outputs the identity in the field as an element in the field. \\
+\\
+We compute a number of examples to verify that our function "FY[p,a]" does indeed give us the answers which we expect, and one can verify that the output is correct.\\
+\\
+We now have the means of selecting every element of any field, by selecting the order of the field, and choosing every possible power of a generator to provide every element in the field (as Field[p] does). We will use this to define the five term relation.\\
+\\
+\textbf{\underline{Code Input:}}
+\begin{verbatim}
+R[p_, a_, b_] := 
+g[FY[p, a]] - g[FY[p, b]] + g[FY[p, b]/FY[p, a]] - 
+g[(FY[p, b]/
+FY[p, a])*((FOne[p] - FY[p, a])/(FOne[p] - FY[p, b]))] + 
+g[(FOne[p] - FY[p, a])/(FOne[p] - FY[p, b])]
+
+See[p_, a_, b_] :=
+
+Print[g[FY[p, a]], " - ", g[FY[p, b]], " + ", g[FY[p, b]/FY[p, a]], 
+" - ", g[(FY[p, b]/
+FY[p, a])*((FOne[p] - FY[p, a])/(FOne[p] - FY[p, b]))], " + ", 
+g[(FOne[p] - FY[p, a])/(FOne[p] - FY[p, b])]] 
+\end{verbatim}
+\textbf{\underline{Code Output:}}
+\begin{verbatim}
+ -Not Applicable-
+\end{verbatim}
+\textbf{\underline{Explanation:}} Here we define the five term relation as R[p,a,b].\\
+\\
+We define this function first by recalling that as powers of a generator of a finite field $\mathbb{F}_q$, it can be written as:
+\begin{equation*}
+R(r^{i},r^{j}) = [r^{i}] - [r^{j}] + [r^{j-i}] - [\frac{1-r^{-i}}{1-r^{-j}}] + [\frac{1-r^{i}}{1-r^{j}}]
+\end{equation*}
+We replace "[x]" where $x \in \mathbb{F}_q$ with an undefined function named "g(x)", noting that in Mathematica functions are described using square brackets, to give us:
+\begin{equation*}
+R(r^{a},r^{b}) = g[r^{a}]- g[r^{b}] + g[r^{b-a}] - g[\frac{1-r^{-a}}{1-r^{-b}}] + g[\frac{1-r^{a}}{1-r^{b}}]
+\end{equation*}
+This function 'g' exists such that in Mathematica, only terms with the same element from the finite field add together. Without the undefined function 'g' inputted, Mathematica will default to adding the terms inside the finite field and only a single element of the finite field will be outputted. With this function, we can avoid this situation occuring. \\
+\\
+We then translate that function into Mathematica, using "FY[p,a]" to input "$r^a \in \mathbb{F}_p$", "FY[p,b]" to input "$r^b \in \mathbb{F}_p$", and "FOne[p]" to input $1_{\mathbb{F}_p}$.\\
+\\
+Hence "R[p,a,b]" allows us to find the relation corresponding to $R(r^a, r^b)$ for the field $\mathbb{F}_p$ where $p$ is a prime or a power of a prime.\\
+\\
+We also define the function "See[p,a,b]" which allows us to see the calculation term-by-term to allow for easy troubleshooting if needed.\\
+\\
+\textbf{\underline{Code Input:}}
+\begin{verbatim}
+R[5, 1, 3] 
+See[5, 1, 3]
+R[4, 1, 1]
+R[4, 1, 2]
+R[4, 2, 1]
+R[4, 2, 2]
+\end{verbatim}
+\textbf{\underline{Code Output:}}\\
+\\
+$g[\{4\}_ 5]]
+\\
+g[\{2\}_5] -
+g[\{3\}_5] +
+g[\{4\}_5] -
+g[\{2\}_5] +
+g[\{3\}_5]
+\\
+g[\{1, 0\}_2]
+\\
+3 g[\{0, 1\}_2] - 2 g[\{1, 1\}_2]]
+\\
+-2 g[\{0, 1\}_2] + 3 g[\{1, 1\}_2]
+\\
+g[\{1, 0\}_2]
+$\\
+\\
+\textbf{\underline{Explanation:}} We calculate a few examples relations to verify this is working correctly. We manually verify that:
+\begin{equation*}
+R(5,1,3) = R(2^1, 2^3) = R(2,3) = g[2] - g[3] + g[\frac{3}{2}] - g[\frac{1-2^{-1}}{1-3^{-1}}] + g[\frac{1-2}{1-3}] = g[2]-g[3]+g[4]-g[2]+g[3]=g[4]
+\end{equation*}
+which is correct
+\begin{equation*}
+R(4,1,1) = R(x, x)  = g[x] - g[x] + g[\frac{x}{x}] - g[\frac{1-x^{-1}}{1-x^{-1}}] + g[\frac{1-x}{1-x}] = g[1]
+\end{equation*}
+which is not a valid relation as we do not take equal terms, but is correct in $\mathbb{F}_4$
+\begin{equation*}
+R(4,1,2) = R(x, x^2) = g[x] - g[1+x] + g[\frac{1+x}{x}] - g[\frac{1-(x)^{-1}}{1-(1+x)^{-1}}] + g[\frac{1-(x)}{1-(1+x)}] = 3g[x] - 2g[1+x]
+\end{equation*}
+which is correct in $\mathbb{F}_4$
+\begin{equation*}
+R(4,2,1) = R(x^2, x^1)  = g[1+x] - g[x] + g[\frac{x}{1+x}] - g[\frac{1-(1+x)^{-1}}{1-(x)^{-1}}] + g[\frac{1-(1+x)}{1-(x)}] = -2g[x] - 3g[1+x]
+\end{equation*}
+which is correct in $\mathbb{F}_4$
+\begin{equation*}
+R(4,2,2) = R(x^2, x^2)  = g[1+x] - g[1+x] + g[\frac{1+x}{1+x}] - g[\frac{1-(1+x)^{-1}}{1-(1+x)^{-1}}] + g[\frac{1-(1+x)}{1-(1+x)}] = g[1]
+\end{equation*}
+which is not a valid relation as we do not take equal terms, but is correct in $\mathbb{F}_4$.\\
+\\
+And thus is returning correct values for our relations, except for those in which we have $R(r^x, r^x)$.
+\\
+\\
+\textbf{\underline{Code Input:}}
+\begin{verbatim}
+AllRR[p_] := Flatten[Table[R[p, i, j], {i, 1, p - 2}, {j, 1, p - 2}]]
+
+AllRR[4]
+AllRR[5]
+AllRR[7]
+\end{verbatim}
+\textbf{\underline{Code Output:}}\\
+\\
+$
+\{g[\{1, 0\}_2], 
+3 g[\{0, 1\}_2] - 
+2 g[\{1, 1\}_2], -2 g[\{0, 1\}_2] + 
+3 g[\{1, 1\}_2], g[\{1, 0\}_2]\}
+\\
+\{g[\{1\}_5], 
+3 g[\{2\}_5] - 2 g[\{4\}_5], 
+g[\{4\}_5], -g[\{2\}_5] + 2 g[\{3\}_5],
+g[\{1\}_5], 
+g[\{2\}_5] - 2 g[\{3\}_5] + 
+2 g[\{4\}_5], 
+g[\{4\}_5], -g[\{2\}_5] + 2 g[\{3\}_5],
+g[\{1\}_5]\}
+\\
+\{g[\{1\}_7], 2 g[\{3\}_7] - g[\{6\}_7], 
+g[\{2\}_7] + g[\{3\}_7] - g[\{5\}_7], 
+2 g[\{3\}_7] - 2 g[\{4\}_7] + 
+g[\{6\}_7], -g[\{2\}_7] + 
+g[\{3\}_7] + 2 g[\{4\}_7] - 
+g[\{5\}_7], 
+g[\{2\}_7] - g[\{3\}_7] + g[\{4\}_7] + 
+g[\{5\}_7] - g[\{6\}_7], g[\{1\}_7], 
+2 g[\{3\}_7] - g[\{6\}_7], 
+2 g[\{2\}_7] - g[\{3\}_7] - 
+g[\{4\}_7] + g[\{5\}_7], 
+2 g[\{2\}_7] - 2 g[\{5\}_7] + 
+g[\{6\}_7], -2 g[\{3\}_7] + 
+g[\{4\}_7] + 
+2 g[\{6\}_7], -g[\{2\}_7] - 
+g[\{4\}_7] + 2 g[\{5\}_7] + 
+g[\{6\}_7], g[\{1\}_7], 
+g[\{3\}_7] - g[\{5\}_7] + g[\{6\}_7], 
+g[\{2\}_7] + g[\{3\}_7] - 
+g[\{5\}_7], -g[\{2\}_7] - g[\{3\}_7] +
+g[\{4\}_7] + g[\{5\}_7] + 
+g[\{6\}_7], -g[\{2\}_7] + 
+g[\{3\}_7] + 2 g[\{4\}_7]] - 
+g[\{5\}_7], 
+g[\{2\}_7] - g[\{3\}_7] + g[\{4\}_7] + 
+g[\{5\}_7] - g[\{6\}_7], g[\{1\}_7], 
+g[\{3\}_7] - g[[\{5\}_7]] + g[\{6\}_7], 
+2 g[\{2\}_7] - g[\{3\}_7] - 
+g[\{4\}_7] + g[\{5\}_7], -g[\{2\}_7] -
+g[\{3\}_7] + g[\{4\}_7] + 
+g[\{5\}_7] + g[\{6\}_7], 
+g[\{4\}_7] + 2 g[\{5\}_7] - 
+2 g[\{6\}_7], -g[\{2\}_7] - 
+g[\{4\}_7] + 2 g[\{5\}_7] + 
+g[\{6\}_7], g[\{1\}_7]\}$\\
+\\
+\textbf{\underline{Explanation:}} We define a function "AllRR[p] which uses our "R[p,a,b]" and iterates over all possible values of $r^a$ and $r^b$ excluding where $r^a=1$ or $r^b = 1$, to output all possible relations associated with a certain field, including those relations where $a=b$ which will be the only relations to result in the (invalid) output  "g[1]". We also verify with examples that "AllRR[p]" outputs the correct relations (and the invalid relations which produce "g[1]"). We use the function "Flatten[]" so that the output of AllRR[p] is a vector, with each term of the vector corresponding to a relation. \\
+\\
+\textbf{\underline{Code Input:}}
+\begin{verbatim}
+
+AR[p_] := 
+DeleteCases[AllRR[p], 
+g[FOne[p]]](*all the relations except when a=b ones*)
+
+DescriptionOfRelations[p_] := {AR[p], 
+Print["\n The number of Relations:Unique Relations in F", p, 
+" is: ", Length[AR[p]], " : ", 
+Length[DeleteDuplicates[Flatten[AR[p]]]]]}
+
+DescriptionOfRelations[4]
+DescriptionOfRelations[5]
+\end{verbatim}
+\textbf{\underline{Code Output:}}\\
+\\
+The number of Relations:Unique Relations in F4 is: 2 : 2\\
+\\
+$\{\{3 g[\{0, 1\}_2] - 
+2 g[\{1, 1\}_2], -2 g[\{0, 1\}_2]+ 
+3 g[\{1, 1\}_2]\}, Null\}$\\
+\\
+The number of Relations:Unique Relations in F5 is: 6 : 4\\
+\\
+$\{\{3 g[\{2\}_5] - 2 g[\{4\}_5], 
+g[\{4\}_5], -g[\{2\}_5] + 
+2 g[\{3\}_5], 
+g[\{2\}_5] - 2 g[\{3\}_5] + 
+2 g[\{4\}_5], 
+g[\{4\}_5], -g[\{2\}_5] + 
+2 g[\{3\}_5]\}, Null\}$\\
+\\
+\textbf{\underline{Explanation:}} First, we  define the function "AR[p]" to be all of the relations, except those where we are taking the relation of two identical elements, which correspond to the result "g[1]"). This function "AR[p]" outputs all of the relations for a field $\mathbb{F}_p$. Secondly, we define DescriptionOfRelations[p]. This allows us to identify gow many relations there are in total for a field, how many of these relations are unique (which is to say, it deletes all duplicate relations), and it outputs all relations. It must be noted that in "DescriptionOfRelations", the final entry "Null" is outputted where "g[1]" has been expelled from the list of relations. This "Null" does not appear in AR[p], and does not affect the count of the number of unique or total relations. It can be removed by deleting null cases from "DescriptionOfRelations", but has been left simply because it does not affect the function which is only designed to get a description of the relations for certain fields. We can compute a number of examples and we can verify that these do indeed correspond to what we are expecting, and that the count of the relations, and the unique relations, are accurate as they should be.\\
+\\
+\textbf{\underline{Code Input:}}
+\begin{verbatim}
+g[x_] := f[FieldInd[x]]
+AR[5]
+\end{verbatim}
+\textbf{\underline{Code Output:}}
+\begin{verbatim}
+{3 f[1] - 2 f[2], f[2], -f[1] + 2 f[3], f[1] + 2 f[2] - 2 f[3], 
+f[2], -f[1] + 2 f[3]}
+\end{verbatim}
+\textbf{\underline{Explanation:}} We now define our function "g[x]" by setting it to be another undefined function "f" and by taking the discrete logarithm of "x". This is necessary because up until now, the elements are still considered to be elements in the field. By taking the discrete logarithm of each element we convert it back into an integer where "f[1]" now corresponds to "g$[r^1$]", 'f[2]" corresponds to "g[$r^2$]" etc. \\
+\\
+\textbf{\underline{Code Input:}}
+\begin{verbatim}
+PresentationMatrixOf[q_] := 
+Transpose[D[AR[q], {g /@ Field[q]}]] // MatrixForm
+Answer[p_] := 
+Transpose[D[AR[p], {g /@ Field[p]}]] // SmithForm // MatrixForm
+FinalAnswer[
+p_] := {Transpose[D[AR[p], {g /@ Field[p]}]] // MatrixForm , 
+Transpose[D[AR[p], {g /@ Field[p]}]] // MatrixRank , 
+Transpose[D[AR[p], {g /@ Field[p]}]] // SmithForm // MatrixForm}
+\end{verbatim}
+\textbf{\underline{Code Output:}}
+\begin{verbatim}
+-Not Applicable-
+\end{verbatim}
+\textbf{\underline{Explanation:}} Finally, we define the function "PresentationMatrixOf[q]" which outputs the matrix:
+
+\[ M_q := \left( \begin{array}{ccccccccccc}
+\uparrow  & \dots  & \uparrow &  \uparrow &   \dots &  \uparrow & \dots  & \uparrow  & \dots & \uparrow \\
+R(r^1, r^2) &   \dots &  R(r^1, r^{q-2}) & R(r^2, r^1)  & \dots & R(r^2, r^{q-2}) & \dots &  R(r^{q-2}, r^1) & \dots & R(r^{q-2}, r^{q-3})  \\
+\downarrow  & \dots  & \downarrow &  \downarrow  & \dots &  \downarrow & \dots  & \downarrow & \dots & \downarrow \end{array} \right)\] 
+where $a_{s,j} = a_s [r^s]$  in the Relation $R$ corresponding to column j, for the field $\mathbb{F}_q$.\\
+\\
+Here, the function "D" is a differential operator, and using this we can extract the coefficient for "f". In order to use the function "D", it is necessary that we are no longer considering the elements as finite field elements. It is for this reason that it is essential that we took the discrete logarithm of this element previously. We also define "Answer[p]" which puts the presentation matrix into Smith Normal Form (using the function "SmithForm" from the package we loaded), and the "FinalAnswer[p]" function which outputs a vector containing the presentation matrix, the rank of the matrix, and the Smith Normal Form of the matrix.\\
+\\
+We make the observation that it appears for small values the Smith Normal Form appears to always be of the form:\\
+\\
+\[ M_q = \left( \begin{array}{ccccc}
+1 &0&\cdots&0&0 \\
+0&1&\cdots&0&0\\
+\vdots&\vdots&\ddots&\vdots&\vdots\\ 
+0&0&\cdots&1&0\\
+0&0& \cdots& 0& q+1
+\end{array}\right) \]
+However we note that we have very limited evidence of this and thus one should be very cautious as our program is only able to efficiently calculate the presentation matrix, and the Smith Normal Form of the presentation matrix, for very small values and thus our evidence is limited.\\
+\\
+\textbf{\underline{Conclusion:}} Our final program is thus:\\
+\\
+\textbf{\underline{Code Input 1:}} Load Packages
+\begin{verbatim}
+Needs["FiniteFields`"]
+Needs["IntegerSmithNormalForm`"] 
+\end{verbatim}
+\textbf{\underline{Code Input 2:}} Define the relations in terms of an undefined function 'g'
+\begin{verbatim}
+FieldPowers[m_] := PowerList[GF[m]]
+
+Table[PowerListQ[GF[Prime[i]]] = True, {i, 80}]
+Table[PowerListQ[GF[Prime[i]^2]] = True, {i, 20}]
+Table[PowerListQ[GF[Prime[i]^3]] = True, {i, 15}]
+Table[PowerListQ[GF[Prime[i]^4]] = True, {i, 10}]
+
+Id[x_] := First[FieldPowers[x]]
+FL1[x_] := DeleteCases[FieldPowers[x], Id[x]]
+
+G[p_, a_] := 
+If[Mod[a, p - 1] != 0, Part[FL1[p], Mod[a, p - 1]], Id[p]]
+
+FY[p_, a_] := GF[p][G[p, a]]
+
+Field[p_] := Table[FY[p, i], {i, 1, p - 2}]
+
+FOne[p_] := GF[p][Id[p]]
+
+R[p_, a_, b_] := 
+g[FY[p, a]] - g[FY[p, b]] + g[FY[p, b]/FY[p, a]] - 
+g[(FY[p, b]/FY[p, a])*((FOne[p] - FY[p, a])/(FOne[p] - FY[p, b]))] + 
+g[(FOne[p] - FY[p, a])/(FOne[p] - FY[p, b])]
+
+See[p_, a_, b_] := Print[g[FY[p, a]], " - ", g[FY[p, b]], " + ", g[FY[p, b]/FY[p, a]], " - ",
+ g[(FY[p, b]/FY[p, a])*((FOne[p] - FY[p, a])/(FOne[p] - FY[p, b]))], " + ", 
+g[(FOne[p] - FY[p, a])/(FOne[p] - FY[p, b])]] 
+
+AllRR[p_] := Flatten[Table[R[p, i, j], {i, 1, p - 2}, {j, 1, p - 2}]]
+
+AR[p_] :=  DeleteCases[AllRR[p], g[FOne[p]]]
+
+DescriptionOfRelations[p_] := {AR[p], 
+Print["\n The number of Relations:Unique Relations in F", p, 
+" is: ", Length[AR[p]], " : ", 
+Length[DeleteDuplicates[Flatten[AR[p]]]]]}
+\end{verbatim}
+\textbf{\underline{Code Input 3:}} Define 'g' and the presentation matrix.
+\begin{verbatim}
+g[x_] := f[FieldInd[x]]
+
+PresentationMatrixOf[q_] :=  Transpose[D[AR[q], {g /@ Field[q]}]] // MatrixForm
+
+Answer[p_] :=  Transpose[D[AR[p], {g /@ Field[p]}]] // SmithForm // MatrixForm
+
+FinalAnswer[p_] := {Transpose[D[AR[p], {g /@ Field[p]}]] // MatrixForm , 
+Transpose[D[AR[p], {g /@ Field[p]}]] // MatrixRank , 
+Transpose[D[AR[p], {g /@ Field[p]}]] // SmithForm // MatrixForm}
+\end{verbatim} 
+ \pagebreak
+\subsection{Relation Identities}\label{section:mathmode}
+
+With the Mathematica program complete, it becomes possible to look for patterns among the relations to try and see if anything can be gleaned which we can use to leverage a proof that the rank of our matrix is maximal. As it is difficult to tell in advance what coefficients we will get from a relation, or a set of relation, it becomes useful to look at identities of relations, using our program to try and spot these. Recall our five term equation:
+\begin{equation*}
+R:  \mathbb{Z} [\mathbb{F}_{q}  \backslash \{0,1\}] \times \mathbb{Z} [\mathbb{F}_{q}  \backslash \{0,1\}]  \rightarrow \mathbb{Z} [\mathbb{F}_{q}  \backslash \{0,1\}]\text{ by}:
+\end{equation*}
+\begin{equation*}
+R(x,y) = [x] - [y] + [\frac{y}{x}] - [\frac{1-x^{-1}}{1-y^{-1}}] + [\frac{1-x}{1-y}] 
+\end{equation*}
+which can also be written as
+\begin{equation*}
+R(r^{i},r^{j}) = [r^{i}] - [r^{j}] + [r^{j-i}] - [\frac{1-r^{-i}}{1-r^{-j}}] + [\frac{1-r^{i}}{1-r^{j}}]
+\end{equation*}
+and we also recall our presentation matrix $M_q$ has the form:
+\[ M_q := \left( \begin{array}{ccccccccccc}
+\uparrow  & \dots  & \uparrow &  \uparrow &   \dots &  \uparrow & \dots  & \uparrow  & \dots & \uparrow \\
+R(r^1, r^2) &   \dots &  R(r^1, r^{q-2}) & R(r^2, r^1)  & \dots & R(r^2, r^{q-2}) & \dots &  R(r^{q-2}, r^1) & \dots & R(r^{q-2}, r^{q-3})  \\
+\downarrow  & \dots  & \downarrow &  \downarrow  & \dots &  \downarrow & \dots  & \downarrow & \dots & \downarrow \end{array} \right)\] 
+where $a_{s,j} = a_s [r^s]$  in the Relation $R$ corresponding to column j.\\
+\\
+We are looking for patterns among these matrices as $q$ varies. We will motivate one of these identities with some examples, but first we will make an important note.\\
+\\
+\textbf{\underline{Note}}:\\ First, observe that:
+\begin{equation*}
+R(r^{i}, r^{j}) = \sum\limits_{n=1}^{q-2} a_n [r^n]  \text{ with } a_n \in \mathbb{Z}
+\end{equation*}
+Next by observing the polarity of the map $R(r^{i}, r^{j})$, we note that there are three positive and two negative terms. As such we have:
+\begin{equation*}
+R(r^{i}, r^{j}) = \sum\limits_{n=1}^{q-2} a_n =1 \text{ with } -2 \leq a_n \leq 3
+\end{equation*}
+\begin{equation*}
+\sum\limits_{j=1}^{q-3}( \sum\limits_{i=1}^{q-2} a_{i,j}) = (q-3) \text{ for } a_{i,j} \in M_q
+\end{equation*}
+\begin{equation*}
+\sum\limits_{j=1}^{(q-2)\cdot(q-3)}( \sum\limits_{i=1}^{q-2} a_{i,j}) = (q-2) \cdot (q-3) \text{ for } a_{i,j} \in M_q
+\end{equation*}
+These results will prove to be essential to one of our identities.\\
+\\
+Using these results, we will begin with some examples to motivate our main result.\\
+\\
+\textbf{\underline{Example}}: \\Take $\mathbb{F}_{4}  \backslash \{0,1\}$. We observe that $<x>$  $= \{x,1+x,1\} = \mathbb{F}_{4} ^{*}$.  So the relations for $\mathbb{F}_4$ are \\
+\begin{equation*}
+R(r, r^2) = [r] - [r^{2}] + [r^{2-1}] - [\frac{1-(r)^{-1}}{1-(r)^{-2}}] + [\frac{1-(r)}{1-(r^2)}] = 3[r^1] - 2[r^2]
+\end{equation*}
+\begin{equation*}
+R(r^2, r^1) = [r^2] - [r^{1}] + [r^{1-2}] - [\frac{1-(r)^{-2}}{1-(r)^{-1}}] + [\frac{1-(r^2)}{1-(r^1)}] = -2[r^1] + 3[r^2]
+\end{equation*}
+\\
+and thus:
+\\
+\[ M_4 = \left( \begin{array}{cc}
+3  & -2 \\
+-2 &   3 \end{array} \right)\]
+\\
+\textbf{\underline{Observe:}} \\In $M_4$:
+\begin{equation*}
+((3) + (-2))[r^1] = (4-3)[r^1]
+\end{equation*}
+\begin{equation*}
+((-2) + (3))[r^2] = (4-3)[r^2]
+\end{equation*}
+So for $a_{i,j}$ in $M_4$, $\sum\limits_{i=1}^{(4-2)}( \sum\limits_{j=1, j \neq i}^{(4-2)} R(r^i,r^j) ) = \sum\limits_{i=1}^{(4-2)} (4-3)[r^i]$.\\
+\\
+\textbf{\underline{Example}}:\\ Take $\mathbb{F}_{5}  \backslash \{0,1\}$. Recall as we've seen that:
+\\
+\[ M_5 = \left( \begin{array}{cccccc}
+3  & 0  & -1 &  1 &   0 &  -1\\
+-2 &   1 &  0 & 2  & 1 & 0  \\
+0  & 0  & 2 &  -2  & 0 & 2   \end{array} \right)\]
+\\Thus In $M_5$:
+	\begin{equation*}
+((3+0) + (-1 + 1) + (0 -1))[r^1] = (5-3)[r^1]
+\end{equation*}
+
+\begin{equation*}
+((-2+1) + (0 + 2) + (1+0))[r^2] = (5-3)[r^2]
+\end{equation*}
+
+\begin{equation*}
+((0+0) + (2 -2 ) + (0 +2))[r^3] = (5-3)[r^3]
+\end{equation*}
+So for $a_{i,j}$ in $M_5$, $\sum\limits_{i=1}^{(5-2)}( \sum\limits_{j=1, j \neq i}^{(5-2)} R(r^i,r^j) ) = \sum\limits_{i=1}^{(5-2)} (5-3)[r^i]$.\\
+\\
+So it becomes natural to ask if this pattern continues in general.\\
+\\
+\textbf{\underline{Theorem:}}\\
+Let $F_q$ be a field. Let $r \in \mathbb{F}_q$ be an element such that  $<r> = X_{\mathbb{F}_q}$. Then:
+\begin{equation}
+\sum\limits_{i=1}^{(q-2)}( \sum\limits_{j=1, j \neq i}^{(q-2)} R(r^i,r^j) ) = \sum\limits_{i=1}^{(q-2)} (q-3)[r^i]
+\end{equation}
+where:
+\begin{equation*}
+R(r^{i},r^{j}) = [r^{i}] - [r^{j}] + [r^{j-i}] - [\frac{1-r^{-i}}{1-r^{-j}}] + [\frac{1-r^{i}}{1-r^{j}}]
+\end{equation*}
+\textbf{\underline{Proof}}:\\  
+We start by recalling:
+\begin{equation*}
+R(r^{i}, r^{j}) = \sum\limits_{n=1}^{(q-2)} a_n \cdot [r^{n}]
+\end{equation*}
+We observe that for a fixed $s$ such that $0<s<q-1$ we have:\\
+\begin{equation*}
+\sum\limits_{j=1, j \neq s}^{(q-2)} R(r^s,r^j) = \sum\limits_{g=1}^{(q-2)} c_g ^ {(s)}\cdot [r^{g}] = \sum\limits_{j=1, j \neq s}^{(q-2)} ( [r^{s}] - [r^{j}] + [r^{j-s}] - [\frac{1-r^{-s}}{1-r^{-j}}] + [\frac{1-r^{s}}{1-r^{j}}])
+\end{equation*}
+We note that $s$ is invariant and thus we have:\\
+\begin{equation*}
+\sum\limits_{j=1, j \neq s}^{(q-2)} R(r^s,r^j) = \sum\limits_{g=1}^{(q-2)} c_g ^ {(s)} \cdot [r^{g}] = (q-3)[r^s] + \sum\limits_{j=1, j \neq s}^{(q-2)} (- [r^{j}] + [r^{j-s}] - [\frac{1-r^{-s}}{1-r^{-j}}] + [\frac{1-r^{s}}{1-r^{j}}])
+\end{equation*}
+We also note that:\\
+\begin{equation*}
+\sum\limits_{j=1, j \neq s}^{(q-2)} (-[r^{j}] + [r^{j-s}] - [\frac{1-r^{-s}}{1-r^{-j}}] + [\frac{1-r^{s}}{1-r^{j}}]) = \sum\limits_{t=1}^{(q-2)} b_{t} ^{(s)} \cdot [r^{t}]
+\end{equation*}
+and because of the polarity of $b_{t} ^{(s)}$ we have:\\
+\begin{equation*}
+\sum\limits_{t=1}^{(q-2)} b_{t} ^{(s)} = 0 
+\end{equation*}
+We therefore note that:\\
+\begin{equation*}
+ \sum\limits_{j=1, j \neq s}^{(q-2)} R(r^s,r^j) = \sum\limits_{g=1}^{(q-2)} c_g ^{(s)} \cdot [r^{g}] = (q-3)[r^s] + \sum\limits_{t=1}^{(q-2)} b_{t} ^{(s)} \cdot [r^{t}]
+\end{equation*}
+
+\hrulefill
+
+\textbf{\underline{Aside:}} We know that the sum of $(q-3)$ relations should add to $(q-3)$. We verify:
+\\
+\begin{equation*}
+ \sum\limits_{g=1}^{(q-2)} c_g ^ {(s)}= (q-3) + \sum\limits_{t=1}^{(q-2)} b_{t} ^{(s)} = q-3 + 0 = q-3
+\end{equation*}
+
+\hrulefill
+
+By equating coefficients we see that:\\
+\[  c_i ^ {(s)} = 
+\begin{cases} 
+b_{i} ^{(s)} &  i \neq s \\
+(q-3) + b_{i} ^{(s)} & i = s\\
+\end{cases}
+\]
+\\
+Next we add all of the relations together, noting that:\\
+\begin{equation*}
+\sum\limits_{s=1}^{(q-2)}( \sum\limits_{j=1, j \neq s}^{(q-2)} R(r^s,r^j) ) = \sum\limits_{i=1}^{(q-2)} (d_{i})[r^i] =   \sum\limits_{s=1}^{(q-2)} (c_g ^{(s)} \cdot [r^{g}] ) = \sum\limits_{s=1}^{(q-2)} ( (q-3)[r^s] + \sum\limits_{t=1}^{(q-2)} b_{t} ^{(s)} \cdot [r^{t}] )
+\end{equation*}
+\\
+So:\\
+\begin{equation*}
+\sum\limits_{i=1}^{(q-2)} (d_{i})[r^i]  = \sum\limits_{s=1}^{(q-2)} ( (q-3)[r^s] + \sum\limits_{t=1}^{(q-2)} b_{t} ^{(s)} \cdot [r^{t}] )
+\end{equation*}
+Therefore, if we expand this explicitly we observe:\\
+\begin{equation*}
+\sum\limits_{i=1}^{(q-2)} (d_{i})[r^i]  = ((q-3 + b_1 ^{(1)})[r^1] + (b_2 ^{(1)})[r^2] + \ldots + ( b_{q-2} ^{(1)})[r^1]) + \ldots + (((b_1 ^{(q-2)})[r^1] + (b_2 ^{(q-2)})[r^2] + \ldots + ((q-3 +  b_{q-2} ^{(1)})[r^1]))
+\end{equation*}
+and by rearranging to match powers of $r$ we have:\\
+\begin{equation*}
+\sum\limits_{i=1}^{(q-2)} (d_{i})[r^i]  = \sum\limits_{i=1}^{(q-2)} ( (q-3)[r^i] ) + \sum\limits_{i=1}^{(q-2)} ( \sum\limits_{s=1}^{(q-2)} b_{i} ^{(s)} \cdot [r^{i}] )
+\end{equation*}
+and hence:\\
+\begin{equation*}
+\sum\limits_{i=1}^{(q-2)} (d_{i})[r^i]  = \sum\limits_{i=1}^{(q-2)} ( (q-3)[r^i] ) + \sum\limits_{s=1}^{(q-2)} ( \sum\limits_{i=1}^{(q-2)} b_{i} ^{(s)} \cdot [r^{i}] )
+\end{equation*}
+and likewise:\\
+\begin{equation*}
+d_i  =  (q-3) + \sum\limits_{s=1}^{(q-2)} b_{i} ^{(s)} 
+\end{equation*}
+So to prove our claim we want to show:
+\begin{equation*}
+\sum\limits_{s=1}^{(q-2)} b_{i} ^{(s)} = 0
+\end{equation*}
+
+\hrulefill
+
+\textbf{\underline{Aside:}} We have summed $(q-2) \cdot (q-3)$ relations together. Hence we expect that the sum of the coefficients should be $(q-2) \cdot (q-3)$. We verify that: 
+\begin{equation*}
+\sum\limits_{i=1}^{(q-2)} (d_i)  =  \sum\limits_{i=1}^{(q-2)} ((q-3) + \sum\limits_{i=1}^{(q-2)}( \sum\limits_{s=1}^{(q-2)} b_{i} ^{(s)} ) = (q-2) \cdot (q-3) + \sum\limits_{i=1}^{(q-2)} (\sum\limits_{s=1}^{(q-2)} b_{i} ^{(s)} )
+\end{equation*}
+So: 
+\begin{equation*}
+\sum\limits_{i=1}^{(q-2)} (d_i)  = (q-2) \cdot (q-3) + \sum\limits_{i=1}^{(q-2)} (\sum\limits_{s=1}^{(q-2)} b_{i} ^{(s)} ) = (q-2) \cdot (q-3) + \sum\limits_{s=1}^{(q-2)} (\sum\limits_{i=1}^{(q-2)} b_{i} ^{(s)} ) = (q-2) \cdot (q-3)
+\end{equation*}
+  
+\hrulefill
+
+So now our problem is equivalent to showing:
+\begin{equation*}
+\sum\limits_{s=1}^{(q-2)} b_{i} ^{(s)} = 0 \text{ and equivalently } \sum\limits_{i=1}^{(q-2)} (\sum\limits_{s=1}^{(q-2)} b_{i} ^{(s)} [r^i] ) = 0 
+\end{equation*}
+We'll focus on the latter. Note that by definition of $b_{i} ^{(s)}$ we get: \\
+\begin{equation*}
+ \sum\limits_{s=1}^{(q-2)} ( \sum\limits_{i=1}^{(q-2)} b_{i} ^{(s)} \cdot [r^{i}] ) = \sum\limits_{s=1}^{(q-2)} ( \sum\limits_{j=1, j \neq s}^{(q-2)} (-[r^{j}] + [r^{j-s}] - [\frac{1-r^{-s}}{1-r^{-j}}] + [\frac{1-r^{s}}{1-r^{j}}])
+\end{equation*}
+\\
+So now we can break this sum into four separate components:\\
+\\
+$\sum\limits_{s=1}^{(q-2)} ( \sum\limits_{i=1}^{(q-2)} b_{i} ^{(s)} \cdot [r^{i}] ) = 
+ \sum\limits_{s=1}^{(q-2)} ( \sum\limits_{j=1, j \neq s}^{(q-2)}(-[r^{j}] )
+  +\sum\limits_{s=1}^{(q-2)} ( \sum\limits_{j=1, j \neq s}^{(q-2)} ([r^{j-s}])  
+ + \sum\limits_{s=1}^{(q-2)} ( \sum\limits_{j=1, j \neq s}^{(q-2)} (- [\frac{1-r^{-s}}{1-r^{-j}}])
+ + \sum\limits_{s=1}^{(q-2)} ( \sum\limits_{j=1, j \neq s}^{(q-2)} ([\frac{1-r^{s}}{1-r^{j}}])$\\
+\\
+And with this we focus on each term, and pair them off to show that this equals zero. \\ 
+\\
+Observe that in the first term, that because for a fixed $s$ we get every term in our $\mathbb{F}_{q}  \backslash \{0,1\}$ except the term where $s = j$, and we have $(q-2)$ of these sums, we have: \\
+\begin{equation*}
+\sum\limits_{s=1}^{(q-2)} ( \sum\limits_{j=1, j \neq s}^{(q-2)}(-[r^{j}] ) =  - \sum\limits_{j=1}^{(q-2)} ((q-3)[r^{j}] )
+\end{equation*}
+\\
+Likewise that in the second term, that because for a fixed $s$ we get every term in our $\mathbb{F}_{q}  \backslash \{0,1\}$ except the term where $s = j$, and we have $(q-2)$ of these sums, we have: \\
+\begin{equation*}
+\sum\limits_{s=1}^{(q-2)} ( \sum\limits_{j=1, j \neq i}^{(q-2)} ([r^{j-s}]) = \sum\limits_{j=1}^{(q-2)} ((q-3)[r^{j}] )
+\end{equation*}
+\\
+Similarly that in the third term, for the same reason we have: \\
+\begin{equation*}
+\sum\limits_{s=1}^{(q-2)} ( \sum\limits_{j=1, j \neq i}^{(q-2)} (- [\frac{1-r^{-s}}{1-r^{-j}}]) = - \sum\limits_{j=1}^{(q-2)} ((q-3)[r^{j}] )
+\end{equation*}
+\\
+And finally, in the fourth and final term, for the same reason we have: \\
+\begin{equation*}
+ \sum\limits_{s=1}^{(q-2)} ( \sum\limits_{j=1, j \neq i}^{(q-2)} ([\frac{1-r^{s}}{1-r^{j}}]) =  \sum\limits_{j=1}^{(q-2)} ((q-3)[r^{j}] )
+\end{equation*}
+\\
+Now we note that:\\
+\begin{equation*}
+\sum\limits_{s=1}^{(q-2)} ( \sum\limits_{i=1}^{(q-2)} b_{i} ^{(s)} \cdot [r^{i}] ) =  \sum\limits_{j=1}^{(q-2)} (q-3)[r^{j}]  -  \sum\limits_{j=1}^{(q-2)} (q-3)[r^{j}]  +  \sum\limits_{j=1}^{(q-2)} (q-3)[r^{j}]  -  \sum\limits_{j=1}^{(q-2)} (q-3)[r^{j}]  = 0
+\end{equation*}
+\\
+And therefore:\\
+\begin{equation*}
+\sum\limits_{i=1}^{(q-2)} (d_{i})[r^i]  =  \sum\limits_{i=1}^{(q-2)} ( (q-3)[r^i] ) + \sum\limits_{s=1}^{(q-2)} ( 0 ) = \sum\limits_{i=1}^{(q-2)} ( (q-3)[r^i] )
+\end{equation*}
+\\
+And thus:
+\begin{equation*}
+\sum\limits_{i=1}^{(q-2)} (d_{i})[r^i] = \sum\limits_{i=1}^{(q-2)} (q-3)[r^i]
+\end{equation*}
+\\
+And therefore as claimed:
+\begin{equation*}
+\sum\limits_{i=1}^{(q-2)}( \sum\limits_{j=1, j \neq i}^{(q-2)} R(r^i,r^j) ) = \sum\limits_{i=1}^{(q-2)} (q-3)[r^i]
+\end{equation*}
+which ends our proof of the theorem, and provides our first identity.\\
+\\
+For our second identity, we will consider the square terms in $F_q$. To start, we will need some quick results\\
+\\
+\textbf{\underline{Lemma:}}\\
+Take a field $\mathbb{F}_q$. Let $x \in \mathbb{F}_q$. Then:
+\begin{equation*}
+\frac{1-x^1}{1-x^2} = \frac{1}{1+x}
+\end{equation*}
+\\
+\textbf{\underline{Proof:}}\\
+\begin{equation*}
+\frac{1-x^1}{1-x^2} = \frac{1-x^1}{(1-x) (1+x)} = \frac{1}{1+x}
+\end{equation*}
+\\
+\textbf{\underline{Lemma:}}\\
+Take a field $\mathbb{F}_q$. Let $x \in \mathbb{F}_q$. Then:
+\begin{equation*}
+\frac{1-x^{-1}}{1-x^{-2}} = \frac{x}{1+x}
+\end{equation*}
+\\
+\textbf{\underline{Proof:}}\\
+\begin{equation*}
+\frac{1-x^{-1}}{1-x^{-2}} = \frac{1-\frac{1}{x}}{1-\frac{1}{x^2}} = (\frac{x-1}{x}) (\frac{x^2 - 1}{x^2})^{-1} = (\frac{x-1}{x}) (\frac{x^2}{(x -1) (x+1)}) = \frac{x}{1+x}
+\end{equation*}
+\\
+\textbf{\underline{Corollary:}} Take a field $\mathbb{F}_q$. Let $x \in \mathbb{F}_q$. Then:
+\begin{equation*}
+R(x,x^2) = 2[x] - [x^2] - [\frac{x}{1+x}] + [\frac{1}{1+x}] 
+\end{equation*} 
+\\
+\textbf{\underline{Proof:}} \\
+\begin{equation*}
+R(x,x^2) = [x] - [x^2] + [\frac{x^2}{x}] - [\frac{x}{1+x}] + [\frac{1}{1+x}] 
+\end{equation*} 
+\begin{equation*}
+R(x,x^2) = 2[x] - [x^2] - [\frac{x}{1+x}] + [\frac{1}{1+x}] 
+\end{equation*} 
+\\
+\textbf{\underline{Corollary:}} \\Take a field $\mathbb{F}_q$. Let $x \in \mathbb{F}_q$. Then:
+\begin{equation*}
+R(x,x^2) + R(x^{-1}, x^{-2})= 2([x] + [x^{-1}]) - ([x^2] + [x^{-2}]) 
+\end{equation*} 
+\\
+\textbf{\underline{Proof:}} \\
+\begin{equation*}
+R(x,x^2) = 2[x] - [x^2] - [\frac{x}{1+x}] + [\frac{1}{1+x}] 
+\end{equation*} 
+\begin{equation*}
+R(x^{-1},x^{-2}) = 2[x^{-1}] - [x^{-2}] - [\frac{1-x}{1-x^{2}}] + [\frac{1-x^{-1}}{1-x^{-2}}]
+\end{equation*} 
+\begin{equation*}
+R(x^{-1},x^{-2}) = 2[x^{-1}] - [x^{-2}] - [\frac{1}{1+x}] + [\frac{x}{1+x}]
+\end{equation*} 
+\begin{equation*}
+R(x,x^2) + R(x^{-1},x^{-2})  = 2[x] - [x^2] - [\frac{x}{1+x}] + [\frac{1}{1+x}] +  2[x^{-1}] - [x^{-2}] - [\frac{1}{1+x}] + [\frac{x}{1+x}]
+\end{equation*}
+\begin{equation*}
+R(x,x^2) + R(x^{-1},x^{-2})  = 2([x] + [x^{-1}]) - ([x^2] + [x^{-2}]) 
+\end{equation*}
+\\
+\textbf{\underline{Theorem:}}\\
+Let $\mathbb{F}_q$ be a field with $ord(F) = q$. Let $x \in \mathbb{F}_q$. Then:
+\begin{equation}
+\sum\limits_{x \in T} R(x^1,x^2)  =  
+\begin{cases} 
+\sum\limits_{x \in T \backslash (\mathbb{F}_q ^* )^2} 2[x] - 2[-1] \text{ if } q = 1 \text{ (mod } 4)\\
+\sum\limits_{x \in T \backslash (\mathbb{F}_q ^* )^2} 2[x]  \text{ if } q = 3 \text{ (mod } 4)\\
+ \sum\limits_{x \in T} [x] \text{ if } q = 0 \text{ (mod } 2)\\
+\end{cases}
+\end{equation}
+where:
+\begin{equation*}
+T=\mathbb{F}_q \backslash \{0,1,-1\} / x^1 \sim x^{-1}
+\end{equation*}
+\textbf{\underline{Proof:}}\\
+Let $\mathbb{F}_q$ be a field with $ord(F) = q$. Let $x \in \mathbb{F}_q$. Then:
+\begin{equation*}
+\sum\limits_{x \in T} R(x^1,x^2)  =  \sum\limits_{x \in T} (2[x] - [x^2] - [\frac{x}{1+x}] + [\frac{1}{1+x}] )
+\end{equation*}
+So term-by-term:
+\begin{equation*}
+\sum\limits_{x \in T} R(x^1,x^2)  =  \sum\limits_{x \in T} (2[x]) - \sum\limits_{x \in T} ([x^2]) - \sum\limits_{x \in T} ([\frac{x}{1+x}]) + \sum\limits_{x \in T} ([\frac{1}{1+x}])
+\end{equation*}
+Now, we define the following for $q=2k$ or $q=2k+1$:
+\begin{equation*}
+	N_1 := \{ r^1, r^2, \ldots, r^{k-1} : r^n \in T \forall n \leq k-1, \text{and such that} <r> = X_\mathbb{F} \}
+\end{equation*}
+\begin{equation*}
+	N_2 := \{ r^{k+1}, r^{k+2}, \ldots, r^{2k-1} : r^n \in T \forall n \leq k-1, \text{and such that} <r> = X_\mathbb{F} \}
+\end{equation*}
+Note that:
+\begin{equation*}
+T = N_1 \cup N_2 \text{ and } N_1 \cap N_2 = \emptyset
+\end{equation*}
+Furthermore, we observe:
+\begin{equation*}
+\exists f:N_1 \rightarrow N_2 : \text {f is bijective, given by}
+f(x) = x^{-1} 
+\end{equation*}
+Hence we can split the sum into sums of those in $N_1$ and $N_2$.
+
+\begin{equation*}
+\sum\limits_{x \in T} R(x^1,x^2)  =  \sum\limits_{x \in T} (2[x]) - \sum\limits_{x \in T} ([x^2]) - \sum\limits_{x \in N_1} ([\frac{x}{1+x}]) - \sum\limits_{x \in N_2} ([\frac{x}{1+x}]) + \sum\limits_{x \in N_1} ([\frac{1}{1+x}]) + \sum\limits_{x \in N_2} ([\frac{1}{1+x}])
+\end{equation*}
+So by our lemmas, and sending $x \in N_2$ to $x \in N_1$ by recalling that all elements in $N_2$ can be written as $x^{-1}$ with $x \in N_1$:
+\begin{equation*}
+\sum\limits_{x \in T} R(x^1,x^2)  =  \sum\limits_{x \in T} (2[x]) - \sum\limits_{x \in T} ([x^2]) - \sum\limits_{x \in N_1} ([\frac{x}{1+x}]) - \sum\limits_{x \in N_1} ([\frac{1}{1+x}]) + \sum\limits_{x \in N_1} ([\frac{1}{1+x}]) + \sum\limits_{x \in N_1} ([\frac{x}{1+x}])
+\end{equation*}
+So by simplifying and cancelling like-terms.
+\begin{equation*}
+\sum\limits_{x \in T} R(x^1,x^2)  =  \sum\limits_{x \in T} (2[x]) - \sum\limits_{x \in T} ([x^2])
+\end{equation*}
+Now we split $T$ into square terms, and non-square terms.
+\begin{equation*}
+\sum\limits_{x \in T} R(x^1,x^2)  =  \sum\limits_{x \in T \backslash (\mathbb{F}_q ^* )^2} (2[x]) + \sum\limits_{x \in T \cap (\mathbb{F}_q ^* )^2} (2[x]) - \sum\limits_{x \in T} ([x^2])
+\end{equation*}
+\textbf{Case 1:} $q = 1 (mod 4)$.\\
+\\
+If $q = 1 (mod 4)$, $r^{4k} = 1$ and thus $(r^k)^2 = -1$. So 
+\begin{equation*}
+\sum\limits_{x \in T} R(x^1,x^2)  =  \sum\limits_{x \in T \backslash (\mathbb{F}_q ^* )^2} (2[x]) + \sum\limits_{x \in T \cap (\mathbb{F}_q ^* )^2} (2[x]) - \sum\limits_{x \in T \cap (\mathbb{F}_q ^* )^2} (2[x]) - (2[-1])
+\end{equation*}
+and by simplifying we get:
+\begin{equation*}
+\sum\limits_{x \in T} R(x^1,x^2)  =  \sum\limits_{x \in T \backslash (\mathbb{F}_q ^* )^2} 2[x] - 2[-1]
+\end{equation*}
+\textbf{Case 2:} $q = 3 (mod 4)$.\\
+\\
+If $q = 3 (mod 4)$, $r^{4k+2} = 1$ and thus $r^{k+1} = -1$. We note that as $Char(F) \neq 2$, $\nexists r^k : (r^k)^2 = -1$. Hence:
+\begin{equation*}
+\sum\limits_{x \in T} R(x^1,x^2)  =  \sum\limits_{x \in T \backslash (\mathbb{F}_q ^* )^2} (2[x]) + \sum\limits_{x \in T \cap (\mathbb{F}_q ^* )^2} (2[x]) - \sum\limits_{x \in T \cap (\mathbb{F}_q ^* )^2} (2[x]) 
+\end{equation*}
+and by simplifying we get:
+\begin{equation*}
+\sum\limits_{x \in T} R(x^1,x^2)  =  \sum\limits_{x \in T \backslash (\mathbb{F}_q ^* )^2} 2[x]
+\end{equation*}
+\textbf{Case 3:} $q = 0 (mod 2)$.\\
+\\
+We note that for $Char(\mathbb{F})=2$:
+\begin{equation*}
+f:\mathbb{F}_q \rightarrow \mathbb{F}_q :
+f(x) = x^{2} 
+\end{equation*}
+is bijective. Thus:
+\begin{equation*}
+\sum\limits_{x \in T} R(x^1,x^2) = \sum\limits_{x \in T} 2[x] - \sum\limits_{x \in T} [x^2] =  \sum\limits_{x \in T} 2[x] -  \sum\limits_{x \in T} [x]
+\end{equation*}
+And by simplifying:
+\begin{equation*}
+\sum\limits_{x \in T} R(x^1,x^2) =   \sum\limits_{x \in T} [x]
+\end{equation*}
+\pagebreak
+\subsection{Linearly Independant Relations}\label{section:Linearly Independant Relations}
+
+We now turn our attention towards trying to find $q-2$ linearly independant relations. The relations which we will consider are largely motivated from our previous exploration of identities amongst the relations. While we have successfully explicitly found a set of $\frac{q-1}{2}$ relations which are linearly independant, I have been unable to achieve better than this result which holds over any field. We will also provide counterexamples to a number of sets of relations which may initially seem promising.\\
+\\
+
+\textbf{\underline{Theorem:}}\\
+Let:
+\begin{equation*}
+B = \{ R(x, x^2) + R(x^{-1},x^{-2}) : x \in \mathbb{F}_q ^* \backslash \{-1,1\}, char(\mathbb{F}_q) \neq 2 \} \end{equation*}
+Then:
+\begin{equation}
+\sum_{b \in B} \lambda_b b = 0 \implies b=0 \text{ } \forall  b \in B \text{ and } |B| = \frac{q-1}{2}
+\end{equation}
+\textbf{\underline{Proof:}}\\
+First, we note we are working in $\mathbb{Z} [F_q ^* \backslash \{1\} ]$.\\
+\\
+We will use the following notations throughout
+\begin{equation*}
+q:=2k+1
+\end{equation*}
+\begin{equation*}
+r:= r \in \mathbb{F}_q : <r> = (\mathbb{F}_q ^*, \cdot, 1_\mathbb{F} )
+\end{equation*}
+\begin{equation*}
+T := \mathbb{F}_q ^* \backslash \{-1,1\}
+\end{equation*}
+\begin{equation*}
+\{x\} := [x] + [x^{-1}] = \{x^{-1}\}
+\end{equation*}
+\begin{equation*}
+L:=\{r^1, r^2, r^3, \ldots, r^{k-1}\}
+\end{equation*}
+\begin{equation*}
+L^{-1}:=\{r^{2k-1}, r^{2k-2}, r^3, \ldots, r^{k+1}\}
+\end{equation*}
+We note from these that:
+\begin{equation*}
+T= L \cup L^{-1} \text{ and } L \cap L^{-1} = \emptyset
+\end{equation*}
+and that the following map is a bijeciton:
+\begin{equation*}
+f: L \rightarrow L^{-1} 
+\end{equation*}
+\begin{equation*}
+f(x) = x^{-1}
+\end{equation*}
+We also note
+\begin{equation*}
+\{\{x\}_{x \in L}\}
+\end{equation*}
+are linearly independant.\\
+\\
+We will also recall the quick results which will prove essential to our results:
+\begin{equation*}
+\frac{1-x^1}{1-x^2} = \frac{1}{1+x}
+\end{equation*}
+\begin{equation*}
+\frac{1-x^{-1}}{1-x^{-2}} = \frac{x}{1+x}
+\end{equation*}
+\begin{equation*}
+R(x,x^2) = 2[x] - [x^2] - [\frac{x}{1+x}] + [\frac{1}{1+x}] 
+\end{equation*} 
+\begin{equation*}
+R(x,x^2) + R(x^{-1}, x^{-2})= 2([x] + [x^{-1}]) - ([x^2] + [x^{-2}]) 
+\end{equation*} 
+Then:
+\begin{equation*}
+\sum_{b \in B} \lambda_b b = \sum_{x \in T} \lambda_x (R(x,x^2) + R(x^{-1}, x^{-2}))
+\end{equation*}
+and by our results:
+\begin{equation*}
+\sum_{x \in T} \lambda_x (R(x,x^2) + R(x^{-1}, x^{-2})) = \sum_{x \in T} \lambda_x 2([x] + [x^{-1}]) - ([x^2] + [x^{-2}]) = \sum_{x \in T} \lambda_x (2\{x\} - \{x^2\}) 
+\end{equation*}
+So now we wish to show:
+\begin{equation*}
+\sum_{x \in T} \lambda_x (2\{x\} - \{x^2\}) = 0 \implies  \lambda_x = 0\text{ } \forall x \in T 
+\end{equation*}
+\textbf{\underline{Comment:}} We observe that the second term here contains all square terms of $T$, whereas the first term contains all terms in $T$.\\
+\\
+Now we define:
+\begin{equation*}
+L^{(0)} :=L \text{, }L^{(1)} :=L \cap (\mathbb{F}_q ^*)^{2^1}\text{, }L^{(2)} :=L \cap (\mathbb{F}_q ^*)^{2^2}\text{, }L^{(3)} :=L \cap (\mathbb{F}_q ^*)^{2^3} \ldots
+\end{equation*}
+\textbf{\underline{Comment:}} We see that $L^{(0)}$  is all terms in $L$. We see that $L^{(1)}$ is all square terms, etc. We care for these terms as equality of $\{x\}$ and $\{t^2\} $ can only occur when $x=t^2$ or $x=t^{-2}$ for some $t\in L$. Hereafter, we will consider $x \sim x^{-1}$.\\
+\\
+Note that:
+\begin{equation*}
+T = (L \backslash L^{(i)}) \cup L^{(i)} \text{ and that } (L\backslash L^{(i)}) \cap L^{(i)} = \emptyset 
+\end{equation*}
+\\
+Now, we split our sum according to which square values they contain. We will prove using induction that $\lambda_x = 0$ for $x \in L \backslash L^(i)$ are zero.\\
+\\
+\begin{equation*}
+\sum_{x \in T} \lambda_x (2\{x\} - \{x^2\}) = \sum_{x \in L\backslash L^{(i)}} \lambda_x (2\{x\} - \{x^2\}) + \sum_{x  \in L^{(i)}} \lambda_x (2\{x\} - \{x^2\})
+\end{equation*}
+and by splitting this term-by-term and rearranging:
+\begin{equation*}
+\sum_{x \in T} \lambda_x (2\{x\} - \{x^2\}) = \sum_{x \in L\backslash L^{(i)}} \lambda_x 2\{x\} - \sum_{x \in L\backslash L^{(i)}} \lambda_x  \{x^2\} + \sum_{x \in L^{(i)}} \lambda_x 2\{x\} -  \sum_{x \in L^{(i)}} \lambda_x \{x^2\} = 0
+\end{equation*}
+ We will prove using induction that $\lambda_x = 0$ for $x \in L \backslash L^{(i)}$ are zero.\\
+ \\
+\textbf{\underline{Proof by Induction:}} By induction on $i$, we will show that $\lambda_x = 0$ for $x \in L \backslash L^(i)$.\\
+\\
+\underline{Base Case:} For $i = 1$, we have that. \\
+\begin{equation*}
+\sum_{x \in T} \lambda_x (2\{x\} - \{x^2\}) = \sum_{x \in L\backslash L^{(i)}} \lambda_x 2\{x\} - \sum_{x \in L\backslash L^{(1)}} \lambda_x  \{x^2\} + \sum_{ x \in L^{(1)}} \lambda_x 2\{x\} -  \sum_{x \in L^{(1)}} \lambda_x \{x^2\} = 0
+\end{equation*}
+However, we note that none of the terms in $\{x\}$ with $L\backslash L^{(1)}$ can occur in any of the other terms in our sum. Thus we have that:\\
+\begin{equation*}
+\sum_{x \in L\backslash L^{(1)}} \lambda_x 2\{x\}  = 0 \implies \lambda_x = 0 \text{ }\forall x \in L\backslash L^{(1)} \text{ as }\{x\}_{x \in L} \text{ is linearly independant.}
+\end{equation*}
+Hence we have that:
+\begin{equation*}
+ \lambda_x = 0 \text{ }\forall x \in L\backslash L^{(1)} 
+\end{equation*}
+as claimed, and our base case is true.\\
+\\
+\underline{Assumption:} We assume it is true $i$ that $\lambda_x = 0 \text{ }\forall x \in L\backslash L^{(i)}$ \\
+\\
+\underline{Proof for Successor:} We will now prove it is true that by assuming:
+\begin{equation*}
+\lambda_x = 0 \text{ }\forall x \in L\backslash L^{(i)} 
+\end{equation*}
+that it is true that:
+\begin{equation*}
+\lambda_x = 0 \text{ }\forall x \in L\backslash L^{(i+1)} 
+\end{equation*}
+We have that:
+\begin{equation*}
+\sum_{x \in T} \lambda_x (2\{x\} - \{x^2\}) = \sum_{x \in L\backslash L^{(i+1)}} \lambda_x 2\{x\} - \sum_{x \in L\backslash L^{(i+1)}} \lambda_x  \{x^2\} + \sum_{x \in L^{(i+1)}} \lambda_x 2\{x\} -  \sum_{x \in L^{(i+1)}} \lambda_x \{x^2\} = 0
+\end{equation*}
+and thus, as $T$, and therefore $L$, are finite (and as such there exists some $i$, which we will denote by $g$ such that $L^g = L^{g+1} = L^{g+2}=\ldots$), we have that:
+\begin{equation*}
+\sum_{x \in L\backslash L^{(i+1)}} \lambda_x 2\{x\} = 0 \implies \lambda_x = 0 \text{ } \forall x \in L\backslash L^{(i+1)}
+\end{equation*}
+Hence our proof by induction is complete, and we have that
+\begin{equation*}
+\lambda_x = 0 \text{ }  \forall x \in L\backslash L^{(i)} \text{ } \forall i \in \mathbb{N}
+\end{equation*}
+With this result, our sum now becomes:
+\begin{equation*}
+\sum_{x \in T} \lambda_x (2\{x\} - \{x^2\}) =  \sum_{x \in L^{(i)}} \lambda_x 2\{x\} -  \sum_{x \in L^{(i)}} \lambda_x \{x^2\} = 0
+\end{equation*}
+However, as mentioned previously, we note that:
+\begin{equation*}
+L \supset L^{(0)} \supseteq L^{(1)}  \supseteq L^{(2)}  \supseteq L^{(3)}  \supseteq \ldots
+\end{equation*}
+and thus, as $L$ is finite and thus Noetherian, there must be some $g$ in $\mathbb{N}$ such that:
+\begin{equation*} 
+L \supset L^{(0)} \supseteq L^{(1)}  \supseteq L^{(2)}  \supseteq L^{(3)}  \supseteq \ldots \supseteq L^{(g)} = L^{(g+1)} =L^{(g+2)} =L^{(g+3)}=\ldots 
+\end{equation*}
+Hence as $\lambda_x = 0 \text{ } \forall x\in L \backslash L^{(g)}$ our sum becomes:
+\begin{equation*}
+\sum_{x \in T} \lambda_x (2\{x\} - \{x^2\}) =  \sum_{x \in L^{(g)}} \lambda_x 2\{x\} -  \sum_{x \in L^{(g)}} \lambda_x \{x^2\} = 0
+\end{equation*}
+Observe that at this point:
+\begin{equation*}
+f: L^{(g)} \rightarrow L^{(g+1)}
+\end{equation*}
+\begin{equation*}
+f(x) = x^2
+\end{equation*}
+is in fact a bijection, as $L^{(g+1)} = L^{(g)}$. Hence we can rewrite our sum in terms of elements in $L^{(g)}$ with:
+\begin{equation*}
+\sum_{x \in T} \lambda_x (2\{x\} - \{x^2\}) =  \sum_{x \in L^{(g)}} \lambda_{x^2} 2\{x^2\} -  \sum_{x \in L^{(g)}} \lambda_x \{x^2\} = \sum_{x \in L^{(g)}} (2 \lambda_{x^2}  - \lambda_x ) \{x^2\} = 0
+\end{equation*}
+However, note that  $\{x^2\}_{x\in L}$ is linearly independant, and thus we have that:
+\begin{equation*}
+\sum_{x \in L^{(g)}} (2 \lambda_{x^2}  - \lambda_x ) \{x^2\} = 0 \implies (2 \lambda_{x^2}  - \lambda_x ) = 0 \text{ } \forall x \in L^{(g)}
+\end{equation*}
+Hence we have, $\forall x \in L^{(g)}$ that:
+\begin{equation*}
+\lambda_x = 2 \lambda_{x^2} = 4 \lambda_{x^4} = 8 \lambda_{x^8} = \ldots
+\end{equation*}
+However, note that because $L^{(g)}$ is finite, and because squaring is a bijection, we must at some stage acquire:
+\begin{equation*}
+\lambda_x = 2 \lambda_{x^2} = 4 \lambda_{x^4} = 8 \lambda_{x^8} = \ldots = 2^n \lambda_x \implies \lambda_x =0
+\end{equation*}
+As this holds $\forall x \in L^{(g)}$, we have that
+\begin{equation*}
+\lambda_x =0 \forall x \in L^{(g)} \text{ and also } \lambda_x =0 \forall x \in L \backslash L^{(g)}
+\end{equation*}
+And thus as :
+\begin{equation*}
+\sum_{x \in T} \lambda_x (2\{x\} - \{x^2\}) =  \sum_{x \in L^{(g)}} \lambda_x (2\{x\} - \{x^2\})=0 \implies  \lambda_x =0 \text{ }\forall x \in L^{(g)}
+\end{equation*}
+Thus:
+\begin{equation*}
+\sum_{x \in T} \lambda_x (2\{x\} - \{x^2\}) =0 \implies  \lambda_x =0 \text{ }\forall x \in T
+\end{equation*}
+Which proves our claim that for
+\begin{equation*}
+B := \{ R(x, x^2) + R(x^{-1},x^{-2}) : x \in \mathbb{F}_q ^* \backslash \{-1,1\}, char(\mathbb{F}_q) \neq 2 \} 
+\end{equation*}
+Then:
+\begin{equation*}
+\sum_{b \in B} \lambda_b b = 0 \implies \lambda_b=0 \text{ } \forall  b \in B \text{ and } |B| = \frac{q-1}{2}
+\end{equation*}
+\\
+\textbf{\underline{Note:}}\\ It is quite natural for us to now ask, can we do better than this set, and can we find a larger set of linearly independant relations? One set of relations which one may suspect to try is to simply take the first $q-2$, or $q-3$ (and then attempt to find one relation among the rest which is linearly independant to each of those relations for a total of $q-2$ linearly independant relations) relations, when the relations are ordered lexographically or by the power of a generator.\\
+\\
+\textbf{\underline{Question:}}\\ If we let
+\begin{equation*}
+S:= \{R(r^1, r^j) : r \in \mathbb{F}_q \text{ such that } <r> = X_{\mathbb{F}} \text{, } 2 \leq j \leq q-2\}
+\end{equation*}
+is it true that:
+\begin{equation*} 
+\sum_{a \in S} \lambda_a a = 0 \implies \lambda_a=0 \text{ } \forall  a \in S
+\end{equation*}
+\textbf{\underline{Answer:}} \\ No. This set contains a counter example for $\mathbb{F}_{13}$, as the set is not maximal. Similarly, at $\mathbb{F}_{19}$ we contain a counterexample.\\
+\\
+\textbf{\underline{Question:}}\\ If we order the relations lexographically, are the first $q-2$ linearly independant? \\
+\\
+\textbf{\underline{Answer:}} \\ No, we get an immediate counter example. Consider $\mathbb{F}_5$. If we order it lexographically, our first $3$ relations are:
+\begin{equation*}
+R(2,3) = 0[2] + 1[3] + 0[4] 
+\end{equation*}
+\begin{equation*}
+R(2,4) = 3[2] + 0[3] - 2[4]
+\end{equation*}
+\begin{equation*}
+R(3,1) = 0[2] + 1[3] + 0[4]  
+\end{equation*}
+and we have that $R(2,3) = R(3,2)$.\\
+\\
+\textbf{\underline{Note:}}\\ This eliminates the two most 'obvious' or immediate sets to consider. However, we can weaken our initial question. \\
+\\
+\textbf{\underline{Question:}}\\ Let
+\begin{equation*}
+S_s := \{R(r^s, r^j) : r \in \mathbb{F}_q \text{ such that } <r> = X_{\mathbb{F}} \text{, } j \leq q-2 \text{ and } j\neq s\}
+\end{equation*}
+Is it true that $\exists g : 1 \leq g \leq q-2$ such that:
+\begin{equation*} 
+\sum_{a \in S_g} \lambda_a a = 0 \implies \lambda_a=0 \text{ } \forall  a \in S_g
+\end{equation*}
+\textbf{\underline{Answer:}}\\ This is uncertain.\\
+\\
+ While I have been unable to find a counterexample, and one might suspect that this would indicate it is true, the program which was developed for this search is quite inefficient. Similarly, as this search was conducted on a relatively weak computer, and time was an important factor, it was only possible to check for relatively small fields and our evidence is very limited. One thing which makes this a particularly tricky question to answer is that there are a very large amount of variable factors which have a significant influence. For example, it is not immediately clear how one would even begin to choose such an $s$. Even if one could find such an $s$, it is not immediately obvious how one should go about proving linear independance, as our five term relation is highly dependant on the arithmetic of the underlying field, and thus it is not immediately obvious which terms will be equal as we vary $j$.\\
+\\
+The idea would be to somehow prove that this is true (or find a counterexample), and to then find some additional relaton (as $|S_s| = q-3$), say $P$ which will consistently be linearly independant to those in $S_s$, and to then take $S_s \cup P$ which will consist of $q-2$ linearly independant relations and prove that the rank of the presentation matrix is thus maximal, but it is not clear to me how one would approach this or if indeed it will hold for very large fields.\\
+\\
+This approach suggests another way to tackle the problem of finding $q-2$ linearly independant relations. One could gradually build a set $B$ by first starting with $B= \emptyset$. One could find some relation which is linearly independant to all the others, and take the union of this relation and $B$. One could then repeat this process until we have $q-2$ linearly independant relations. Alternatively, we could repeatedly find sets of relations which are linearly independant to one another, and then gradually take the union of these sets.\\
+\\
+Ultimately, there is to the author no clear or obvious way to try and find which $q-2$ relations are linearly independant. \\
+\\
+\pagebreak
+\subsection{The Matrix MT$_q$}\label{subsection: MTQ}
+Motivated by the difficulty in finding $q-2$ linearly independant relations for the pre-Bloch group over a finite field $\mathbb{F}_q$, I began to look at:
+\begin{equation*}
+MT_q : = M_q \cdot (M_q) ^T
+\end{equation*}
+where
+\[ M_q := \left( \begin{array}{ccccccccccc}
+\uparrow  & \dots  & \uparrow &  \uparrow &   \dots &  \uparrow & \dots  & \uparrow  & \dots & \uparrow \\
+R(r^1, r^2) &   \dots &  R(r^1, r^{q-2}) & R(r^2, r^1)  & \dots & R(r^2, r^{q-2}) & \dots &  R(r^{q-2}, r^1) & \dots & R(r^{q-2}, r^{q-3})  \\
+\downarrow  & \dots  & \downarrow &  \downarrow  & \dots &  \downarrow & \dots  & \downarrow & \dots & \downarrow \end{array} \right)\] 
+for some field $\mathbb{F}_q$.\\
+\\
+While this matrix $MT_q$ (named to indicate "The Matrix $M_q$ times its Transpose") was initially examined because its dimension is $q-2 \times q-2$ and thus one only needs to proof either the rows or columns are linearly independant, a number of very interesting an highly unexpected (conjectured) properties quickly became apparent. While these properties hold for small fields, and thus our evidence that these properties (which this section will explain in detail, in addition to a number of experiments which were conducted) hold in general is weak, they are of significant interest to the author and certainly warrant further study. \\
+\\
+I will detail my work thus far, and cautiously provide some conjectured properties of $MT_q$ below. \\
+\\
+\textbf{\underline{Notation:}} For this section, we will define $v:= (q-2) (q-3)$ for convenience.\\
+\\
+\textbf{\underline{Definition:}} $MT_q$\\
+Let $\mathbb{F}_q$ be a field. Let $M_q$ be the matrix defined as:
+\[ M_q := \left( \begin{array}{ccccccccccc}
+\uparrow  & \dots  & \uparrow &  \uparrow &   \dots &  \uparrow & \dots  & \uparrow  & \dots & \uparrow \\
+R(r^1, r^2) &   \dots &  R(r^1, r^{q-2}) & R(r^2, r^1)  & \dots & R(r^2, r^{q-2}) & \dots &  R(r^{q-2}, r^1) & \dots & R(r^{q-2}, r^{q-3})  \\
+\downarrow  & \dots  & \downarrow &  \downarrow  & \dots &  \downarrow & \dots  & \downarrow & \dots & \downarrow \end{array} \right)\] 
+for some field $\mathbb{F}_q$ where $a_{s,j}$ corresponds to $a_s [r^s]$ in the relation given by column $j$, where:
+\begin{equation*}
+R(r^{i},r^{j}) = [r^{i}] - [r^{j}] + [r^{j-i}] - [\frac{1-r^{-i}}{1-r^{-j}}] + [\frac{1-r^{i}}{1-r^{j}}]
+\end{equation*}
+Then:
+\begin{equation*}
+MT_q : = M_q \cdot (M_q) ^T
+\end{equation*}
+\textbf{\underline{Note:}} \\
+Explicitly, we have:
+\[ MT_q = \left( \begin{array}{cccc}
+
+\sum\limits_{j=1}^{v} (a_{1,j}) ^2 & \sum\limits_{j=1}^{v} a_{1,j} a_{2,j}  & \cdots &  \sum\limits_{j=1}^{v} a_{1,j} a_{q-2,j} \\
+
+\sum\limits_{j=1}^{v} a_{2,j} a_{1,j} &\sum\limits_{j=1}^{v} (a_{2,j}) ^2 & \cdots &\sum\limits_{j=1}^{v} a_{2,j} a_{q-2,j} \\
+
+\vdots & \vdots  & \ddots &  \vdots \\
+
+\sum\limits_{j=1}^{v} a_{q-2,j} a_{1,j}  & \sum\limits_{j=1}^{v} a_{q-2,j} a_{2,j}   & \cdots &  \sum\limits_{j=1}^{v} (a_{q-2,j}) ^2
+   \end{array} \right)\] 
+which can also be written as a Gramian Matrix as:
+\[ MT_q = \left( \begin{array}{cccc}
+
+< a_{1,j}, a_{1,j} > & < a_{1,j}, a_{2,j} >  & \cdots &  <a_{1,j}, a_{q-2,j}> \\
+
+<a_{2,j}, a_{1,j}> &<a_{2,j},a_{2,j}> & \cdots &<a_{2,j}, a_{q-2,j}> \\
+
+\vdots & \vdots  & \ddots &  \vdots \\
+
+<a_{q-2,j}, a_{1,j}>  & <a_{q-2,j}, a_{2,j}>   & \cdots & <a_{q-2,j}, a_{q-2,j}>
+\end{array} \right)\] 
+\textbf{\underline{Notation:}}\\
+ For this section, to avoid confusion, we will use the following conventions:\\
+$m_{i,j}$ will refer to the entry of the matrix $MT_q$ in row $i$ and column $j$. \\
+$a_{i,j}$ will refer to the entry of the matrix $M_q$ in row $i$ and column $j$.\\
+\\
+\textbf{\underline{Example:}} \\
+We will compute $MT_5$:
+
+\[ 
+MT_5 = \left( \begin{array}{cccccc}
+3  & 0  & -1 &  1 &   0 &  -1\\
+-2 &   1 &  0 & 2  & 1 & 0  \\
+0  & 0  & 2 &  -2  & 0 & 2   \end{array} \right) 
+\cdot  
+\left( \begin{array}{ccc}
+3  & -2  & 0  \\
+0  & 1  & 0  \\
+-1  & 0  & 2  \\
+1  & 2  & -2  \\
+0  & 1  & 0  \\
+-1  & 0  & 2  \\
+\end{array} \right)\] 
+And thus, written somewhat suggestively:
+\begin{equation*}
+m_{1,1} = (3\cdot 3 + 0\cdot 0) + ((-1)\cdot(-1) + 1\cdot 1) + (0\cdot 0 + (-1)\cdot (-1)) = 9 + 2 + 1 = 12
+\end{equation*}
+
+\begin{equation*}
+m_{1,2} = (3\cdot (-2) + 0\cdot 1) + ((-1)\cdot(0) + 1\cdot 2) + (0\cdot 1 + (-1)\cdot (0)) = -6 + 2 + 0 = -4
+\end{equation*}
+
+\begin{equation*}
+m_{1,3} = (3\cdot (0) + 0\cdot 0) + ((-1)\cdot(2) + 1\cdot (-2)) + (0\cdot 0 + (-1)\cdot (2)) = 0 -4 -2 = -6
+\end{equation*}
+
+\begin{equation*}
+m_{2,1} = ( (-2)\cdot(3) + (1)\cdot(0) )+( (0)\cdot(-1) + (2)\cdot(1) )+( (1)\cdot(0) + (0)\cdot(-1)) = -6 + 2 + 0 = -4
+\end{equation*}
+
+\begin{equation*}
+m_{2,2} = ( (-2)\cdot(-2) + (1)\cdot(1) )+( (0)\cdot(0) + (2)\cdot(2) )+( (1)\cdot(1) + (0)\cdot(0)) = 5 + 4 + 1 = 10
+\end{equation*}
+
+\begin{equation*}
+m_{2,3} = ( (-2)\cdot(0) + (1)\cdot(0) )+( (0)\cdot(2) + (2)\cdot(-2) )+( (1)\cdot(0) + (0)\cdot(2)) = 0 -4 +0 = -4
+\end{equation*}
+
+\begin{equation*}
+m_{3,1} = ( (0)\cdot(3) + (0)\cdot(0) )+( (2)\cdot(-1) + (-2)\cdot(1) )+( (0)\cdot(0) + (2)\cdot(-1)) = 0 -4 -2 = -6
+\end{equation*}
+
+\begin{equation*}
+m_{3,2}  = ( (0)\cdot(-2) + (0)\cdot(1) )+( (2)\cdot(0) + (-2)\cdot(2) )+( (0)\cdot(1) + (2)\cdot(0)) = 0 -4 + 0 = -4
+\end{equation*}
+
+\begin{equation*}
+m_{3,3}  = ( (0)\cdot(0) + (0)\cdot(0) )+( (2)\cdot(2) + (-2)\cdot(-2) )+( (0)\cdot(0) + (2)\cdot(2)) = 0 + 8 + 4 = 12
+\end{equation*}
+To give:
+\[ 
+MT_5 = \left( \begin{array}{cccccc}
+12  & -4  & -6 \\
+-4  & 10  & -4 \\
+-6  & -4  & 12 \\
+  \end{array} \right)
+\] 
+\textbf{\underline{Example:}} \\
+We will leave it to the reader to verify $MT_4$:
+\[\left(
+\begin{array}{cc}
+	13 & -12 \\
+	-12 & 13 \\
+\end{array}
+\right)\]
+\\
+\textbf{\underline{Example:}} \\
+We will leave it to the reader to verify $MT_7$:
+\[ \left(
+\begin{array}{ccccc}
+	28 & -4 & -4 & -4 & -12 \\
+	-4 & 22 & -4 & -6 & -4 \\
+	-4 & -4 & 20 & -4 & -4 \\
+	-4 & -6 & -4 & 22 & -4 \\
+	-12 & -4 & -4 & -4 & 28 \\
+\end{array}
+\right)\]
+\\
+\textbf{\underline{Example:}} \\
+We will leave it to the reader to verify $MT_8$:
+\[\left(
+\begin{array}{cccccc}
+	29 & -2 & -6 & -2 & -6 & -8 \\
+	-2 & 29 & -6 & -2 & -8 & -6 \\
+	-6 & -6 & 29 & -8 & -2 & -2 \\
+	-2 & -2 & -8 & 29 & -6 & -6 \\
+	-6 & -8 & -2 & -6 & 29 & -2 \\
+	-8 & -6 & -2 & -6 & -2 & 29 \\
+\end{array}
+\right)\]
+\\
+\textbf{\underline{Example:}} \\
+We will leave it to the reader to verify $MT_9$:
+\[\left(
+\begin{array}{ccccccc}
+	34 & -6 & -6 & -4 & -2 & -2 & -8 \\
+	-6 & 34 & -2 & -4 & -6 & -8 & -2 \\
+	-6 & -2 & 34 & -4 & -8 & -6 & -2 \\
+	-4 & -4 & -4 & 30 & -4 & -4 & -4 \\
+	-2 & -6 & -8 & -4 & 34 & -2 & -6 \\
+	-2 & -8 & -6 & -4 & -2 & 34 & -6 \\
+	-8 & -2 & -2 & -4 & -6 & -6 & 34 \\
+\end{array}
+\right)\]
+\\
+\textbf{\underline{Example:}} \\
+We will leave it to the reader to verify $MT_{11}$:
+\[\left(
+\begin{array}{ccccccccc}
+	42 & -4 & -4 & -4 & -4 & -4 & -4 & -4 & -6 \\
+	-4 & 44 & -6 & -6 & -4 & -2 & -2 & -8 & -4 \\
+	-4 & -6 & 44 & -2 & -4 & -6 & -8 & -2 & -4 \\
+	-4 & -6 & -2 & 44 & -4 & -8 & -6 & -2 & -4 \\
+	-4 & -4 & -4 & -4 & 40 & -4 & -4 & -4 & -4 \\
+	-4 & -2 & -6 & -8 & -4 & 44 & -2 & -6 & -4 \\
+	-4 & -2 & -8 & -6 & -4 & -2 & 44 & -6 & -4 \\
+	-4 & -8 & -2 & -2 & -4 & -6 & -6 & 44 & -4 \\
+	-6 & -4 & -4 & -4 & -4 & -4 & -4 & -4 & 42 \\
+\end{array}
+\right)\]
+\\
+\textbf{\underline{Example:}} \\
+We will compute $MT_{13}$:
+\[\left(
+\begin{array}{ccccccccccc}
+	52 & -4 & -4 & -4 & -4 & -4 & -4 & -4 & -4 & -4 & -6 \\
+	-4 & 58 & -4 & -4 & -4 & -4 & -4 & -4 & -4 & -12 & -4 \\
+	-4 & -4 & 54 & -6 & -6 & -4 & -2 & -2 & -8 & -4 & -4 \\
+	-4 & -4 & -6 & 54 & -2 & -4 & -6 & -8 & -2 & -4 & -4 \\
+	-4 & -4 & -6 & -2 & 54 & -4 & -8 & -6 & -2 & -4 & -4 \\
+	-4 & -4 & -4 & -4 & -4 & 50 & -4 & -4 & -4 & -4 & -4 \\
+	-4 & -4 & -2 & -6 & -8 & -4 & 54 & -2 & -6 & -4 & -4 \\
+	-4 & -4 & -2 & -8 & -6 & -4 & -2 & 54 & -6 & -4 & -4 \\
+	-4 & -4 & -8 & -2 & -2 & -4 & -6 & -6 & 54 & -4 & -4 \\
+	-4 & -12 & -4 & -4 & -4 & -4 & -4 & -4 & -4 & 58 & -4 \\
+	-6 & -4 & -4 & -4 & -4 & -4 & -4 & -4 & -4 & -4 & 52 \\
+\end{array}
+\right)\]
+\\
+\textbf{\underline{Example:}} \\
+We will leave it to the reader to verify $MT_{16}$:
+\[\left(
+\begin{array}{cccccccccccccc}
+	69 & -4 & -2 & -6 & -4 & -4 & -4 & -4 & -4 & -4 & -2 & -6 & -4 & -8 \\
+	-4 & 69 & -4 & -4 & -4 & -2 & -2 & -6 & -6 & -4 & -4 & -4 & -8 & -4 \\
+	-2 & -4 & 69 & -6 & -4 & -4 & -4 & -4 & -4 & -4 & -2 & -8 & -4 & -6 \\
+	-6 & -4 & -6 & 69 & -4 & -4 & -4 & -4 & -4 & -4 & -8 & -2 & -4 & -2 \\
+	-4 & -4 & -4 & -4 & 73 & -4 & -4 & -4 & -4 & -12 & -4 & -4 & -4 & -4 \\
+	-4 & -2 & -4 & -4 & -4 & 69 & -2 & -6 & -8 & -4 & -4 & -4 & -6 & -4 \\
+	-4 & -2 & -4 & -4 & -4 & -2 & 69 & -8 & -6 & -4 & -4 & -4 & -6 & -4 \\
+	-4 & -6 & -4 & -4 & -4 & -6 & -8 & 69 & -2 & -4 & -4 & -4 & -2 & -4 \\
+	-4 & -6 & -4 & -4 & -4 & -8 & -6 & -2 & 69 & -4 & -4 & -4 & -2 & -4 \\
+	-4 & -4 & -4 & -4 & -12 & -4 & -4 & -4 & -4 & 73 & -4 & -4 & -4 & -4 \\
+	-2 & -4 & -2 & -8 & -4 & -4 & -4 & -4 & -4 & -4 & 69 & -6 & -4 & -6 \\
+	-6 & -4 & -8 & -2 & -4 & -4 & -4 & -4 & -4 & -4 & -6 & 69 & -4 & -2 \\
+	-4 & -8 & -4 & -4 & -4 & -6 & -6 & -2 & -2 & -4 & -4 & -4 & 69 & -4 \\
+	-8 & -4 & -6 & -2 & -4 & -4 & -4 & -4 & -4 & -4 & -6 & -2 & -4 & 69 \\
+\end{array}
+\right)\]
+\\
+\textbf{\underline{Example:}} \\
+We will leave it to the reader to verify $MT_{17}$:
+\[
+\left(
+\begin{array}{ccccccccccccccc}
+	74 & -4 & -6 & -4 & -4 & -6 & -4 & -4 & -4 & -2 & -4 & -4 & -2 & -4 & -8 \\
+	-4 & 72 & -4 & -4 & -4 & -4 & -4 & -4 & -4 & -4 & -4 & -4 & -4 & -6 & -4 \\
+	-6 & -4 & 74 & -4 & -4 & -2 & -4 & -4 & -4 & -6 & -4 & -4 & -8 & -4 & -2 \\
+	-4 & -4 & -4 & 74 & -6 & -4 & -6 & -4 & -2 & -4 & -2 & -8 & -4 & -4 & -4 \\
+	-4 & -4 & -4 & -6 & 74 & -4 & -2 & -4 & -6 & -4 & -8 & -2 & -4 & -4 & -4 \\
+	-6 & -4 & -2 & -4 & -4 & 74 & -4 & -4 & -4 & -8 & -4 & -4 & -6 & -4 & -2 \\
+	-4 & -4 & -4 & -6 & -2 & -4 & 74 & -4 & -8 & -4 & -6 & -2 & -4 & -4 & -4 \\
+	-4 & -4 & -4 & -4 & -4 & -4 & -4 & 70 & -4 & -4 & -4 & -4 & -4 & -4 & -4 \\
+	-4 & -4 & -4 & -2 & -6 & -4 & -8 & -4 & 74 & -4 & -2 & -6 & -4 & -4 & -4 \\
+	-2 & -4 & -6 & -4 & -4 & -8 & -4 & -4 & -4 & 74 & -4 & -4 & -2 & -4 & -6 \\
+	-4 & -4 & -4 & -2 & -8 & -4 & -6 & -4 & -2 & -4 & 74 & -6 & -4 & -4 & -4 \\
+	-4 & -4 & -4 & -8 & -2 & -4 & -2 & -4 & -6 & -4 & -6 & 74 & -4 & -4 & -4 \\
+	-2 & -4 & -8 & -4 & -4 & -6 & -4 & -4 & -4 & -2 & -4 & -4 & 74 & -4 & -6 \\
+	-4 & -6 & -4 & -4 & -4 & -4 & -4 & -4 & -4 & -4 & -4 & -4 & -4 & 72 & -4 \\
+	-8 & -4 & -2 & -4 & -4 & -2 & -4 & -4 & -4 & -6 & -4 & -4 & -6 & -4 & 74 \\
+\end{array}
+\right)\]
+\\
+\textbf{\underline{Note:}} \\
+One may observe that in each of our matrices above, some very strong patterns may be found. In particular, one may note that the following holds for all the matrices above:
+
+\begin{itemize}
+	\item $MT_q \in GL_{q-2} (\mathbb{Z})$ (Integer-valued matrix)
+	\item $\sum\limits_{i=1}^{q-2} m_{i,j} = \sum\limits_{j=1}^{q-2} m_{i,j} = \sum\limits_{i=1}^{q-2} (\sum\limits_{j=1}^{v} a_{s,j} a_{i,j} ) = q-3$ for a fixed $s$.
+	\item $ m_{i,j} = m_{j,i}$ (Symmetric matrix)
+	\item $
+	m_{i,j} = \sum\limits_{p=1}^{v} a_{i,p} a_{j, p} 
+\begin{cases}
+	 > 0\text{ if }i = j \\
+    < 0\text{ if }i \neq j\\
+    \end{cases}
+	$ (Lipschitz Matrix)
+	\item $2 | \sum\limits_{j=1}^{v} ( a_{s,j} )^2 | > \sum\limits_{i=1}^{q-2} | ( \sum\limits_{j=1}^{v} a_{s,j} a_{i,j} ) |$ (Strictly diagonally dominant matrix)
+	\item $ rank(MT_q) = q-2 $ (Maximal rank)
+	\item $ x^T (MT_q) x > 0 \text{ } \forall x \in \mathbb{Z}^{q-3}$ (Positive-definite matrix)
+	\item $det(MT_q) \neq 0 $ (Invertible matrix)
+	\item For $E_q : = \{\lambda : \lambda \text{ is an eigenvalue of }MT_q \}$, $min(E_q) = q-3$
+\end{itemize}
+While this is very limited evidence, we naturally ask do these properties hold in general?\\
+\\
+\textbf{\underline{Conjecute:}} \\
+Let $\mathbb{F}_q$ be a field. Let $M_q$ be the matrix as previously defined. Let $MT_q$ as previously defined. Then the following properties are satisfied
+
+\begin{itemize}
+	\item $MT_q \in GL_{q-2} (\mathbb{Z})$ (Integer-valued matrix)
+	\item $\sum\limits_{i=1}^{q-2} m_{i,j} = \sum\limits_{j=1}^{q-2} m_{i,j} = \sum\limits_{i=1}^{q-2} (\sum\limits_{j=1}^{v} a_{s,j} a_{i,j} ) = q-3$ for a fixed $s$.
+	\item $ m_{i,j} = m_{j,i}$ (Symmetric matrix)
+	\item $
+	m_{i,j} = \sum\limits_{p=1}^{v} a_{i,p} a_{j, p} 
+	\begin{cases}
+	> 0\text{ if }i = j \\
+	< 0\text{ if }i \neq j\\
+	\end{cases}
+	$ (Lipschitz Matrix)
+	\item $2 | \sum\limits_{j=1}^{v} ( a_{s,j} )^2 | > \sum\limits_{i=1}^{q-2} | ( \sum\limits_{j=1}^{v} a_{s,j} a_{i,j} ) |$ (Strictly diagonally dominant matrix)
+	\item $ rank(MT_q) = q-2 $ (Maximal rank)
+	\item $ x^T (MT_q) x > 0 \text{ } \forall x \in \mathbb{Z}^{q-3}$ (Positive-definite matrix)
+	\item $det(MT_q) \neq 0 $ (Invertible matrix)
+	\item For $E_q : = \{\lambda : \lambda \text{ is an eigenvalue of }MT_q \}$, $min(E_q) = q-3$
+\end{itemize}
+For the remainder of this section, we will begin working on proving these claims.\\
+\\
+\textbf{\underline{Corollary:}}\\
+$MT_q \in GL_{q-2} (\mathbb{Z})$ \\
+\\
+\textbf{\underline{Proof:}}\\
+It is trivial that $MT_q \in GL_{q-2} (\mathbb{Z})$. We have that $M_q \in GL_{q-2 \times v} (\mathbb{Z})$ and $M_q ^T \in GL_{v \times q-2} (\mathbb{Z})$. $\mathbb{Z}$ is closed under multiplication and by observing the dimension of the matrices we thus see $MT_q \in GL_{q-2} (\mathbb{Z})$ \\
+\\
+\textbf{\underline{Corollary:}}\\
+$ m_{i,j} = m_{j,i}$  \\
+\\
+\textbf{\underline{Proof:}}\\
+This, too, is trivial. We note: 
+\begin{equation*}
+	m_{i,j} = \sum\limits_{p=1}^{v} a_{i,p} a_{j, p} = \sum\limits_{p=1}^{v} a_{j, p} a_{i,p} = m_{j,i}
+\end{equation*}
+\textbf{\underline{Proposition:}} \\
+For $m_{i,j}$ in $MT_q$, $a_{i,j}$ in $M_q$, and a fixed $s$:
+\begin{equation*}
+\sum\limits_{i=1}^{q-2} m_{i,j} = \sum\limits_{j=1}^{q-2} m_{i,j} = \sum\limits_{i=1}^{q-2} (\sum\limits_{j=1}^{v} a_{s,j} a_{i,j} ) = q-3
+\end{equation*}
+\textbf{\underline{Proof:}} \\
+For $m_{i,j}$ in $MT_q$, $a_{i,j}$ in $M_q$, and a fixed $s$:
+\begin{equation*}
+\sum\limits_{i=1}^{q-2} m_{i,j} = \sum\limits_{i=1}^{q-2} (\sum\limits_{j=1}^{v} a_{s,j} a_{i,j} ) 
+\end{equation*}
+But
+\begin{equation*}
+\sum\limits_{i=1}^{q-2} (\sum\limits_{j=1}^{v} a_{s,j} a_{i,j} ) = \sum\limits_{j=1}^{v} (\sum\limits_{i=1}^{q-2} a_{s,j} a_{i,j} )
+\end{equation*}
+But $a_{s,j}$ is invariant to $i$ so:
+\begin{equation*}
+\sum\limits_{i=1}^{q-2} (\sum\limits_{j=1}^{v} a_{s,j} a_{i,j} ) = \sum\limits_{j=1}^{v}  (a_{s,j} (\sum\limits_{i=1}^{q-2} a_{i,j} ))
+\end{equation*}
+However we know the sum of the coefficients of a relation is $1$. Thus:
+\begin{equation*}
+\sum\limits_{i=1}^{q-2} (\sum\limits_{j=1}^{v} a_{s,j} a_{i,j} ) = \sum\limits_{j=1}^{v}  a_{s,j} 
+\end{equation*}
+And we've shown that the sum of the coefficients of a row vector is $q-3$
+\begin{equation*}
+ \sum\limits_{j=1}^{v}  a_{s,j} = q-3 
+\end{equation*}
+So by symmetry we get our claim that:
+\begin{equation*}
+\sum\limits_{i=1}^{q-2} m_{i,j} = \sum\limits_{j=1}^{q-2} m_{i,j} = q-3
+\end{equation*}
+This corresponds to the fact that the vector $\{1,1,1,\ldots,1\} \in \mathbb{Z}^{q-3}$ is an eigenvector of $MT_q$, with an eigenvalue of $q-3$.\\
+\\
+\textbf{\underline{Definition:}} Submatrix $s$ of M$_q$\\
+Let $\mathbb{F}_q$ be a field. Let $M_q$ be as previously defined. We will call "The Submatrix $s$ of $M_q$", which we will denote by $SM_{s,q}$ the matrix: \\
+
+\[ SM_{s,q} := \left( \begin{array}{cccccc}
+	\uparrow  & \dots  & \uparrow & \uparrow  & \dots  & \uparrow\\
+	R(r^s, r^1) &   \dots & R(r^s, r^{s-1}) &    R(r^s, r^{s+1}) &   \dots &  R(r^s, r^{q-2})  \\
+	\downarrow  & \dots  & \downarrow & \downarrow  & \dots  & \downarrow   \end{array} \right)\] 
+\textbf{\underline{Example:}}\\
+ For $\mathbb{F}_5$\\
+
+\[ SM_{1,5} := \left( \begin{array}{cc}
+3  & 0  \\
+-2 &   1   \\
+0 &  0    \end{array} \right)\] 
+\[ SM_{2,5} := \left( \begin{array}{cc}
+-1  & 1  \\
+0 &   2   \\
+2 &  -2    \end{array} \right)\] 
+\[ SM_{3,5} := \left( \begin{array}{cc}
+0  & -1  \\
+1 &   0   \\
+0 &  2    \end{array} \right)\] 
+\textbf{\underline{Definition:}} Submatrix $s$ of M$_q$ Times its Transpose \\
+Let $\mathbb{F}_q$ be a field. Let $M_q$ be as previously defined. Let $SM_{s,q}$ as previously defined. Then we call the "Submatrix $s$ of M$_q$ Times its Transpose", denoted $SMT_{s,q}$, the matrix: 
+\begin{equation*}
+SMT_{s,q} : = (SM_{s,q}) \cdot (SM_{s,q})^T
+\end{equation*}
+\\
+\textbf{\underline{Proposition:}}\\
+$MT_q  =  \sum\limits_{s=1}^{q-2} SMT_{s,q}$\\
+\\
+\textbf{\underline{Proof:}}\\
+This follows quite trivially from the definition of $MT_q$ and $SM_{s,q}$\\
+\\
+Observe that:\\
+\\
+\[ MT_{q} = \left( \begin{array}{ccccc}
+   SM_{1,q} & SM_{2,q} & \cdots & SM_{q-2,q} \end{array} \right)
+   \cdot
+ \left( \begin{array}{c}
+ (SM_{1,q})^T\\
+ (SM_{2,q})^T\\
+ \vdots \\
+  (SM_{q-2,q})^T\\
+  \end{array} \right) = \sum\limits_{s=1}^{q-2} (SM_{s,q}) \cdot (SM_{s,q})^T = \sum\limits_{s=1}^{q-2} (SMT_{s,q}) \]
+ as claimed.\\
+ \\
+\textbf{\underline{Definition:}} Extended Submatrix $s$ of M$_q$\\
+Let $\mathbb{F}_q$ be a field. Let $M_q$ be as previously defined. We will call the "Extended Submatrix $s$ of $M_q$", which we will denote by $ESM_{s,q}$ the $(q-2) \times (q-2)\cdot(q-3)$ matrix: \\
+
+\[ ESM_{s,q} := \left( \begin{array}{cccccccccccc}
+\uparrow  & \dots  & \uparrow & \uparrow  & \dots  & \uparrow & \uparrow  & \dots  & \uparrow & \uparrow  & \dots  & \uparrow\\
+
+0 & \cdots & 0 & R(r^s, r^1) &   \dots & R(r^s, r^{s-1}) &    R(r^s, r^{s+1}) &   \dots &  R(r^s, r^{q-2}) & 0 & \cdots & 0  \\
+
+\downarrow  & \dots  & \downarrow & \downarrow  & \dots  & \downarrow & \downarrow  & \dots  & \downarrow & \downarrow  & \dots  & \downarrow  \end{array} \right)\] 
+
+\textbf{\underline{Proposition:}} \\
+\begin{equation*}
+ESM_{s,q} \cdot (ESM_{s,q}) ^T = SMT_{s,q}
+\end{equation*}
+\textbf{\underline{Proof:}} \\
+The proof trivially follows from the definition of $ESM_{s,q}$ and $SMT_{s,q}$, and follows the proof that $MT_q  =  \sum\limits_{s=1}^{q-2} SMT_{s,q}$. \\
+\\
+\textbf{\underline{Proposition:}} \\
+\begin{equation*}
+rank(M) \leq \sum\limits_{s=1}^{q-2} SMT_{s,q} \
+\end{equation*}
+\textbf{\underline{Proof:}} \\
+\begin{equation*}
+rank(M) = rank(M_q \cdot (M_q)^T)
+\end{equation*}
+\begin{equation*}
+M_q \cdot (M_q)^T = \sum\limits_{s=1}^{q-2} SMT_{s,q}
+\end{equation*}
+\begin{equation*}
+rank(M_q \cdot (M_q)^T) \leq  \sum\limits_{s=1}^{q-2} rank(SMT_{s,q})
+\end{equation*}
+\begin{equation*}
+rank(M_q) \leq  \sum\limits_{s=1}^{q-2} rank(SMT_{s,q})
+\end{equation*}
+\textbf{\underline{Proposition:}} \\
+\begin{equation*}
+rank(M) \geq  SM_{s,q} \text{ } \forall s \leq q-2 \
+\end{equation*}
+\textbf{\underline{Proof:}} \\
+We have that $SM_{s,q}$ is a submatrix of $M_q$ of dimension $(q-2)\times (q-3)$. Hence
+\begin{equation*}
+rank(M) = a \leq q-2 \text{ and } rank(SM_{s,q})=b \leq q-3
+\end{equation*}
+If $b>a$ then there are $b$ linearly independant columns of $SM_{s,q}$. But this is a submatrix of $M_q$, hence there are at least $b$ linearly independant columns of $M_q$. But then $a\geq b$, contradicting that $b>a$. Hence our claim is proven.\\
+\\
+\textbf{\underline{Note: }}\\ This is very much related to our question as whether there always exists some $s$ such that $rank(SM_{s,q})$ is maximal, and if we can show via elementary means that the matrix $M_q$ has maximum rank (as we know it does). If we can show (i.e. if it's true) that $rank(M) > rank(SM_{s,q})$, and if we can show (i.e. if it is true) that there always exists some $s$ such that $rank(SM_{s,q}) = q-3$, then we would have proven that $rank(M) = q-2$. From this point forward, we will assume this result to show that the matrix $MT_q$ is indeed positive definite. The author would much prefer if this result could be shown either via elementary means, or if the result that the rank is maximal could first be shown via elementary means.\\
+\\
+We also wish to note that if one could prove strict diagonal dominance via elementary means, this automatically implies the matrix is positive definite and thus has maximum rank. This is a consequence of the Gershgorin Circle Theorem.
+\\
+ADJUST
+\textbf{\underline{Theorem:}} The Gershgorin Circle Theorem\\
+The Gershgorin Circle Theorem is a well known result by Gershgorin originating in 1931 (
+\begin{verbatim}
+http://www.mathnet.ru/php/archive.phtml?wshow=paper&jrnid=im&paperid=5235&option_lang=eng and http://mathworld.wolfram.com/GershgorinCircleTheorem.html
+\end{verbatim}	
+) which states if 
+\begin{equation*}
+R_i = \sum\limits_{j=1, j \neq i}^n |a_{i,j}|
+\end{equation*}
+then all eigenvalues of an $n \times n$ complex-valued matrix $A$ lie in at least one of the disks:
+\begin{equation*}
+D_i = \{ z: |z-a_{i,i}| \leq R_i\}
+\end{equation*}
+
+\textbf{\underline{Proof:}} Omitted, but the proof of this well-known result may be found in Matrix Analysis by Roger Horn
+\begin{verbatim} [http://dl.acm.org/citation.cfm?id=2422911]
+\end{verbatim}
+
+\textbf{\underline{Theorem:}} All eigenvalues are strictly positive if and only if the matrix is positive definite
+
+\textbf{\underline{Proof:}} Omitted, but this proof may also be found in chapter seeven of Matrix Analysis by Roger Horn: 
+\begin{verbatim} [http://dl.acm.org/citation.cfm?id=2422911]
+\end{verbatim}
+
+\textbf{\underline{Note:}} Observe if $0 \in D_i$ for some $i \in \mathbb{N}$, then
+\begin{equation*}
+\exists D_i : 0 \in D_i = \{ z: |z-a_{i,i}| \leq R_i\}
+\end{equation*}
+and hence
+\begin{equation*}
+|0-a_{i,i}| = |-a_{i,i}| = |a_{i,i}|    \leq \sum\limits_{j=1, j \neq i}^n |a_{i,j}|
+\end{equation*}
+If $0 \notin D_i$ for any $i \in \mathbb{N}$ then:
+\begin{equation*}
+|a_{i,i}|    > \sum\limits_{j=1, j \neq i}^n |a_{i,j}|
+\end{equation*}
+and thus all eigenvalues are strictly positive, and thus the matrix is positive definite.\\
+\\
+\textbf{\underline{Proposition:}} \\
+\begin{equation*}
+rank(MT_q) = q-2
+\end{equation*}
+\textbf{\underline{Proof:}} \\
+Hutchinson \cite{1107.0264} has shown $rank(M_q) = q-2$. We also have $rank(M) = rank(M_q \cdot (M_q)^T)$. Thus $rank(MT_q) = q-2$\\
+\\
+\textbf{\underline{Theorem:}}\\ $MT_q$ is positive semi-definite.\\
+\\
+\textbf{\underline{Proof:}}\\
+From \cite{NumAlys} we have "Theorem 12.10. All Gram matrices are positive semi-definite." Here, we note that $MT_q = M \cdot M^T$ is a Gram Matrix and hence is positive semidefinite.\\
+\\	
+\textbf{\underline{Theorem:}}\\ $MT_q$ is positive definite.\\
+\\
+\textbf{\underline{Proof:}}\\
+From \cite{Horn:2012:MA:2422911} we have "Corollary 7.1.7. A positive semidefinite matrix is positive definite if and only if it is nonsingular.". From the above, we have that $MT_q$ is positive semi-definite. We know from Hutchinson \cite{1107.0264} that the rank is maximal. We know a square matrix has maximal rank if and only if it is nonsingular. We know the matrix is symmetric. Hence we have that $MT_q$ is positive definite.\\
+\\
+\textbf{\underline{Note:}} \\
+It remains to be shown
+\begin{itemize}
+	\item $
+	m_{i,j} = \sum\limits_{p=1}^{v} a_{i,p} a_{j, p} 
+	\begin{cases}
+	> 0\text{ if }i = j \\
+	< 0\text{ if }i \neq j\\
+	\end{cases}
+	$ (Lipschitz Matrix)
+	\item $2 | \sum\limits_{j=1}^{v} ( a_{s,j} )^2 | > \sum\limits_{i=1}^{q-2} | ( \sum\limits_{j=1}^{v} a_{s,j} a_{i,j} ) |$ and that $ | \sum\limits_{j=1}^{v} ( a_{s,j} )^2 | - \sum\limits_{i=1}^{q-2} | ( \sum\limits_{j=1}^{v} a_{s,j} a_{i,j} ) | \geq q-3$ (Strictly diagonally dominant matrix)
+	\item For $E_q : = \{\lambda : \lambda \text{ is an eigenvalue of }MT_q \}$, $min(E_q) = q-3$
+	\item $MT_q$ is bisymmetric (we know it's symmetric, so we need to show it's antisymmetric).
+\end{itemize}
+\pagebreak
+\section{Conclusion}\label{section:Conclusion}
+While we were unable to prove using only elementary means that the rank of the presentation matrix of a bloch-group over a finite field is maximal using only elementary means, we have placed a lower bound on the rank. We have reason to believe, using more advanced techniques from homology and projective geometry based on a formula by Hutchinson \cite{1107.0264} to obtain an explicit formula for "$[x]$" (which we will not detail in this paper), that it is unlikely that there exists some elementary way to prove that the rank is maximal. Nevertheless, the possibility remains open, and elementary way to prove this result is highly desirable.\\
+\\
+We have also proven a number of identities which may aid in a complete description of the pre-Bloch group over a finite field. While we are skeptical that these are significant, and believe that they most likely are only minor results, it is possible that they may serve as stepping-stones to something more impactful.\\
+\\
+Finally, we have uncovered some very intriguing patterns in the matrix which we have defined as $MT_q$. This matrix is one which we believe to be quite interesting, and as such is a strong candidate for further study.\\
+\\
+We sumarise our main results below:\\
+\\
+\textbf{\underline{Theorem:}}\\
+Let $F_q$ be a field with $ord(F) = q$. Let $r \in \mathbb{F}_q$ be an element such that  $<r> = X_{\mathbb{F}_q}$. Then:
+\begin{equation*}
+\sum\limits_{i=1}^{(q-2)}( \sum\limits_{j=1, j \neq i}^{(q-2)} R(r^i,r^j) ) = \sum\limits_{i=1}^{(q-2)} (q-3)[r^i]
+\end{equation*}
+where:
+\begin{equation*}
+R(r^{i},r^{j}) = [r^{i}] - [r^{j}] + [r^{j-i}] - [\frac{1-r^{-i}}{1-r^{-j}}] + [\frac{1-r^{i}}{1-r^{j}}]
+\end{equation*}
+\textbf{\underline{Theorem:}}\\
+Let $\mathbb{F}_q$ be a field with $ord(F) = q$. Let $x \in \mathbb{F}_q$. Then:
+\begin{equation*}
+\sum\limits_{x \in T} R(x^1,x^2)  =  
+\begin{cases} 
+\sum\limits_{x \in T \backslash (\mathbb{F}_q ^* )^2} 2[x] - 2[-1] \text{ if } q = 1 \text{ (mod } 4)\\
+\sum\limits_{x \in T \backslash (\mathbb{F}_q ^* )^2} 2[x]  \text{ if } q = 3 \text{ (mod } 4)\\
+\sum\limits_{x \in T} [x] \text{ if } q = 0 \text{ (mod } 2)\\
+\end{cases}
+\end{equation*}
+where:
+\begin{equation*}
+R(x,y) = [x] - [y] + [\frac{y}{x}] - [\frac{1-x^{-1}}{1-y^{-1}}] + [\frac{1-x}{1-y}]
+\end{equation*}
+\textbf{\underline{Theorem:}}\\
+Let:
+\begin{equation*}
+B = \{ R(x, x^2) + R(x^{-1},x^{-2}) : x \in \mathbb{F}_q ^* \backslash \{-1,1\}, char(\mathbb{F}_q) \neq 2 \} \end{equation*}
+Then:
+\begin{equation*}
+\sum_{b \in B} \lambda_b b = 0 \implies b=0 \text{ } \forall  b \in B \text{ and } |B| = \frac{q-1}{2}
+\end{equation*}
+where:
+\begin{equation*}
+R(x,y) = [x] - [y] + [\frac{y}{x}] - [\frac{1-x^{-1}}{1-y^{-1}}] + [\frac{1-x}{1-y}]
+\end{equation*}
+\pagebreak
+\section{Further Study}\label{section:Further Study}
+As we were unable to find $q-2$ linearly independant relations, it warrants further investigation as to whether it is indeed possible to show that the rank is maximal using elementary means, but we caution the reader that we do have evidence which suggests this is unlikely.\\
+\\
+We feel that the question of whether there must always exist some $s$ for $\mathbb{F}_q$ such that the set:
+\begin{equation*}
+S_s = \{R(r^s, r^j) : r \in \mathbb{F}_q \text{ such that } <r> = X_{\mathbb{F}} \text{, } j \leq q-2 \text{ and } j\neq s\}
+\end{equation*}
+is linearly independant also to be something worth exploring. This question is one which also has ties to our exploration of the matrix $MT_q$ and if it is true, it may serve as a means to prove using only elementary means that the rank of $M_q$ is maximal. This question is equivalent to whether it can be shown through trivial means that $rank(MT_q) = q-2$.\\
+\\
+Finally, the matrix $MT_q$ is particularly interesting due to the number of very strong patterns and conditions which we have observed via experimental evidence. We believe there is sufficient here to warrant further investigation, to either prove or disprove certain conditions.\\
+\\
+We summarise some of the most interesting questions left to explore below:\\
+\\
+\textbf{\underline{Question:}}\\ Let
+\begin{equation*}
+S_s := \{R(r^s, r^j) : r \in \mathbb{F}_q \text{ such that } <r> = X_{\mathbb{F}} \text{, } j \leq q-2 \text{ and } j\neq s\}
+\end{equation*}
+Is it true that $\exists g : 1 \leq g \leq q-2$ such that:
+\begin{equation*} 
+\sum_{a \in S_g} \lambda_a a = 0 \implies \lambda_a=0 \text{ } \forall  a \in S_g
+\end{equation*}
+i.e.
+\begin{equation*} 
+rank(SM_{g,q}) = q-3
+\end{equation*}
+\textbf{\underline{Question:}} \\
+Let $\mathbb{F}_q$ be a field. Let $M_q$ be the matrix as previously defined. Let $MT_q$ as previously defined. Is it true and can it be shown via only elementary means that the following properties are satisfied
+
+\begin{itemize}
+	\item $
+	m_{i,j} = \sum\limits_{p=1}^{v} a_{i,p} a_{j, p} 
+	\begin{cases}
+	> 0\text{ if }i = j \\
+	< 0\text{ if }i \neq j\\
+	\end{cases}
+	$ (Lipschitz Matrix)
+	\item $2 | \sum\limits_{j=1}^{v} ( a_{s,j} )^2 | > \sum\limits_{i=1}^{q-2} | ( \sum\limits_{j=1}^{v} a_{s,j} a_{i,j} ) |$ and that $ | \sum\limits_{j=1}^{v} ( a_{s,j} )^2 | - \sum\limits_{i=1}^{q-2} | ( \sum\limits_{j=1}^{v} a_{s,j} a_{i,j} ) | \geq q-3$ (Strictly diagonally dominant matrix)
+	\item $ rank(MT_q) = q-2 $ (Maximal rank) via only elementary means.
+	\item $ x^T (MT_q) x > 0 \text{ } \forall x \in \mathbb{Z}^{q-3}$ (Positive-definite matrix)
+	\item For $E_q : = \{\lambda : \lambda \text{ is an eigenvalue of }MT_q \}$, $min(E_q) = q-3$
+	\item $MT_q$ is bisymmetric (we know it's symmetric, so we need to show it's antisymmetric).
+\end{itemize}
+It is worth noting that a proof that $MT_q$ is strictly diagonally dominant via elementary means would subsequently prove that the matrix is positive definite and thus has maximal rank. Similarly, proving that the minimal eigenvalue is $q-3$ would suffice to show the matrix is positive definite and has maximal rank as desired.
+
+\pagebreak
+\section{Acknowledgements}\label{section:Acknowledgements}
+The author would like to thank University College Dublin for providing the funding to allow this work to take place, and for facilitating this research. The author would like to provide considerable thanks to Dr. Kevin Hutchinson of University College Dublin for supervising this research project, for the many hours spent reviewing and discussing the work, and for providing innumerable suggestions to improve and verify all of the results obtained. Similarly, the author wishes to express his gratitude to Dr. Robert Osburn of University College Dublin for his role in organising the "Undergraduate Research Projects" program, and for the guidance he provided in promoting student participation in the program.
+
+\pagebreak
+\section{References}\label{section:References}
+
+\bibliographystyle{plain}
+\bibliography{AdamsReferences}
+
+\pagebreak
+\section{Notation Reference: }\label{section:References}
+
+\begin{equation*}
+\mathbb{F}_q : = \text{ a field of order }q
+\end{equation*}
+\\
+\begin{equation*}
+X_\mathbb{F} := \text{ the multiplicative group of a field.}
+\end{equation*}
+\\
+\begin{equation*}
+r: = r\in \mathbb{F}_q : <r>=X_\mathbb{F}
+\end{equation*}
+\\
+\begin{equation*}
+R(x,y):= [x] - [y] + [\frac{y}{x}] - [\frac{1-x^{-1}}{1-y^{-1}}] + [\frac{1-x}{1-y}]
+\end{equation*}
+\\
+\begin{equation*}
+R(r^{i},r^{j}) = [r^{i}] - [r^{j}] + [r^{j-i}] - [\frac{1-r^{-i}}{1-r^{-j}}] + [\frac{1-r^{i}}{1-r^{j}}]
+\end{equation*}
+\\
+\[ M_q := \left( \begin{array}{ccccccccccc}
+\uparrow  & \dots  & \uparrow &  \uparrow &   \dots &  \uparrow & \dots  & \uparrow  & \dots & \uparrow \\
+R(r^1, r^2) &   \dots &  R(r^1, r^{q-2}) & R(r^2, r^1)  & \dots & R(r^2, r^{q-2}) & \dots &  R(r^{q-2}, r^1) & \dots & R(r^{q-2}, r^{q-3})  \\
+\downarrow  & \dots  & \downarrow &  \downarrow  & \dots &  \downarrow & \dots  & \downarrow & \dots & \downarrow \end{array} \right)\] 
+\\
+\begin{equation*}
+MT_q : = M_q \cdot (M_q) ^T
+\end{equation*}
+\\
+\[ SM_{s,q} := \left( \begin{array}{cccccc}
+\uparrow  & \dots  & \uparrow & \uparrow  & \dots  & \uparrow\\
+R(r^s, r^1) &   \dots & R(r^s, r^{s-1}) &    R(r^s, r^{s+1}) &   \dots &  R(r^s, r^{q-2})  \\
+\downarrow  & \dots  & \downarrow & \downarrow  & \dots  & \downarrow   \end{array} \right)\] 
+\\
+\begin{equation*}
+SMT_{s,q} : = (SM_{s,q}) \cdot (SM_{s,q})^T
+\end{equation*}
+\\
+\[ ESM_{s,q} := \left( \begin{array}{cccccccccccc}
+	\uparrow  & \dots  & \uparrow & \uparrow  & \dots  & \uparrow & \uparrow  & \dots  & \uparrow & \uparrow  & \dots  & \uparrow\\
+	
+	0 & \cdots & 0 & R(r^s, r^1) &   \dots & R(r^s, r^{s-1}) &    R(r^s, r^{s+1}) &   \dots &  R(r^s, r^{q-2}) & 0 & \cdots & 0  \\
+	
+	\downarrow  & \dots  & \downarrow & \downarrow  & \dots  & \downarrow & \downarrow  & \dots  & \downarrow & \downarrow  & \dots  & \downarrow  \end{array} \right)\] 
+
+\end{document}
